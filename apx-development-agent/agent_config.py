@@ -1,0 +1,1 @@
+AGENT = {'name': 'APX Development Agent', 'description': 'Copiloto de desarrollo APX para análisis, cambios controlados, revisión, pruebas e impacto sobre componentes existentes.', 'recommended_model': 'GPT-5.6 Sol', 'alternative_model': 'GPT-5.3-Codex', 'skills': ['apx-development', 'apx-code-review', 'apx-testing', 'apx-change-impact'], 'mcp': ['github', 'apx-context-demo']}
