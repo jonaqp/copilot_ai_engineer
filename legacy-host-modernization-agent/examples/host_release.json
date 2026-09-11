@@ -1,0 +1,11 @@
+{
+  "project": "Demo Peru",
+  "jira_key": "DEMO-456",
+  "summary": "[Peru - Demo] Host - Release",
+  "packages_ready": true,
+  "rollback_plan": "Restaurar version anterior mediante procedimiento corporativo aprobado",
+  "evidence": [
+    "captura de sincronizacion en entorno previo",
+    "resultado QA"
+  ]
+}

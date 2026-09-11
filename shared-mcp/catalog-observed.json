@@ -1,0 +1,49 @@
+{
+  "source": "captura aportada por el usuario, agosto 2026",
+  "scope": "MCP visibles en la captura; no representa necesariamente el catalogo corporativo completo",
+  "servers": [
+    {
+      "id": "com.cells/cells-doc-server",
+      "version_observed": "0.3.0",
+      "status_observed": "Active",
+      "purpose": "RAG para documentacion BBVA Cells",
+      "remote": null,
+      "local": {
+        "transport": "stdio",
+        "command": "npx",
+        "args": ["-y", "@cells/rag-mcp-server"]
+      }
+    },
+    {
+      "id": "com.figma/figma-mcp-server-remote",
+      "version_observed": "1.0.0",
+      "status_observed": "Active",
+      "purpose": "Contexto y design information de Figma",
+      "remote": {
+        "transport": "streamable-http",
+        "url": "https://mcp.figma.com/mcp"
+      },
+      "local": {
+        "transport": "http",
+        "url": "http://127.0.0.1:3845/mcp",
+        "requires": "Figma Desktop con Dev Mode/MCP local habilitado"
+      }
+    },
+    {
+      "id": "io.github.github/github-mcp-server-remote",
+      "version_observed": "1.9.0",
+      "status_observed": "Active",
+      "purpose": "GitHub Enterprise BBVA",
+      "remote": {
+        "transport": "streamable-http",
+        "url": "https://copilot-api.bbva.ghe.com/mcp"
+      },
+      "local": {
+        "transport": "stdio",
+        "runtime": "docker",
+        "image": "ghcr.io/github/github-mcp-server",
+        "requires": ["GITHUB_HOST", "GITHUB_PERSONAL_ACCESS_TOKEN"]
+      }
+    }
+  ]
+}

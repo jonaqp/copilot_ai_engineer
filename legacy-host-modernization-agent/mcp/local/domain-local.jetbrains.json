@@ -1,0 +1,10 @@
+{
+  "servers": {
+    "host-local": {
+      "command": "python",
+      "args": [
+        "mcp/local_servers/server.py"
+      ]
+    }
+  }
+}

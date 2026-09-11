@@ -1,0 +1,14 @@
+{
+  "servers": {
+    "bbva-github": {
+      "type": "http",
+      "url": "https://copilot-api.bbva.ghe.com/mcp",
+      "requestInit": {
+        "headers": {
+          "X-MCP-Toolsets": "repos,pull_requests,actions,code_security,dependabot,security_advisories",
+          "X-MCP-Readonly": "true"
+        }
+      }
+    }
+  }
+}

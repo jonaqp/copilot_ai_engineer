@@ -1,0 +1,12 @@
+{
+  "servers": {
+    "jira-bbva-approved": {
+      "type": "http",
+      "url": "https://REPLACE_WITH_BBVA_APPROVED_JIRA_MCP_ENDPOINT",
+      "headers": {
+        "Authorization": "Bearer ${JIRA_MCP_TOKEN}"
+      }
+    }
+  },
+  "_note": "Plantilla. No es un endpoint real. Usar OAuth/SSO corporativo si el MCP aprobado lo soporta y evitar tokens en archivos."
+}

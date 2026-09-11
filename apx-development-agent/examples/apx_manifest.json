@@ -1,0 +1,6 @@
+{
+  "resource_type": "ud-batch",
+  "job_count": 1,
+  "branch": "feature/DEMO-123",
+  "coverage_pct": 82
+}

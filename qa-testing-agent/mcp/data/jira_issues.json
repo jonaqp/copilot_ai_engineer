@@ -1,0 +1,12 @@
+{
+  "PEQA-DEMO-101": {
+    "summary": "[Peru - Demo] DataX - PEQA - Pase a producción",
+    "status": "Ready",
+    "issue_type": "Story",
+    "labels": [
+      "DATAX_DQA",
+      "CRQ"
+    ],
+    "note": "Registro sintético; no corresponde a un ticket productivo."
+  }
+}

@@ -1,38 +1,39 @@
 # APX Development Agent
 
-Copiloto de desarrollo APX para análisis, cambios controlados, revisión, pruebas e impacto sobre componentes existentes.
+Aplicación de demo independiente para PyCharm + GitHub Copilot.
 
-## Qué incluye
+## Modelo
 
-- Aplicación demo Flask (`app.py`) con UI y endpoint `POST /api/agent-plan`.
-- Perfil GitHub Copilot en `.github/agents/apx-development-agent.agent.md`.
-- Skills reutilizables en `.github/skills/`.
-- Configuración oficial de GitHub MCP Server para VS Code en `.vscode/mcp.json`.
-- MCP local de demostración sin datos corporativos en `mcp/demo_server.py`.
-- Guías de modelo, MCP, seguridad y uso.
-- Tests de humo con pytest.
+**Claude Sonnet 5**. Solo se recomiendan modelos Claude/Anthropic. Alternativa: Claude Opus 5.
 
-## Inicio rápido
+## Skills
+
+- `apx-best-practices`
+- `apx-change-impact`
+- `apx-code-generation`
+- `apx-code-review`
+- `apx-testing`
+
+## MCP
+
+- GitHub Enterprise BBVA remoto: `mcp/remote/github-bbva.jetbrains.json`.
+- GitHub local Docker: `mcp/local/github-docker.jetbrains.json`.
+- Dominio local `apx-local`: `mcp/local/domain-local.jetbrains.json`.
+- Catálogo Cells/Figma/GitHub: `mcp/remote/catalog-all-observed.jetbrains.json` y `mcp/local/catalog-all-observed-local.jetbrains.json`.
+
+Ver `docs/MCP_GUIDE.md` y `prompts/CASOS_DE_USO.md`.
+
+## Demo sin servicios externos
+
+```bash
+python scripts/run_demo_flow.py
+python scripts/test_local_mcp.py
+```
+
+## Flask
 
 ```bash
 python -m venv .venv
-# Linux/macOS: source .venv/bin/activate
-# Windows PowerShell: .venv\Scripts\Activate.ps1
 pip install -r requirements.txt
-pytest -q
 python app.py
 ```
-
-Abrir `http://127.0.0.1:5000`.
-
-## Uso con GitHub Copilot
-
-1. Abrir esta carpeta como workspace en VS Code con GitHub Copilot habilitado.
-2. Verificar que el perfil aparezca en el selector de agentes.
-3. Iniciar GitHub MCP Server desde la configuración del workspace. La opción incluida usa OAuth mediante Docker y callback local.
-4. Seleccionar **APX Development Agent** y pedir una tarea concreta.
-5. Copilot cargará las Skills cuando su descripción coincida con la tarea.
-
-## Importante
-
-Los detalles APX/Cells/Jira/producción específicos de una organización deben conectarse mediante documentación o MCP autorizados. Este paquete no inventa endpoints, políticas ni convenciones propietarias. Sustituir el MCP demo por fuentes corporativas aprobadas antes de uso real.

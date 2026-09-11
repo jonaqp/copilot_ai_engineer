@@ -1,0 +1,21 @@
+{
+  "source_status": "referencia interna localizada - julio 2026; validar allowlist vigente",
+  "allowed_toolsets_reference": [
+    "code_security",
+    "copilot",
+    "copilot_spaces",
+    "dependabot",
+    "discussions",
+    "gists",
+    "git",
+    "github_support_docs_search",
+    "issues",
+    "labels",
+    "notifications",
+    "projects",
+    "pull_requests",
+    "repos",
+    "security_advisories",
+    "stargazers"
+  ]
+}

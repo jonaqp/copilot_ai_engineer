@@ -1,16 +1,7 @@
-# Modelo recomendado
+# Modelo recomendado - Claude Sonnet 5
 
-## Principal: GPT-5.6 Sol
+**Principal:** `Claude Sonnet 5` (Anthropic / Claude).
 
-Se recomienda para **APX Development Agent** porque el flujo requiere razonamiento sobre código, cambios multiarchivo y validación técnica.
+**Alternativa Claude:** Claude Opus 5.
 
-## Alternativa
-
-GPT-5.3-Codex.
-
-## Política práctica
-
-- Usar el modelo principal para cambios, análisis de riesgo o decisiones multi-step.
-- Usar un modelo rápido para clasificación, resumen o transformación mecánica cuando el riesgo sea bajo.
-- No depender del nombre del modelo en la lógica del agente; la disponibilidad depende del plan y del entorno de Copilot.
-- Mantener instrucciones cortas, verificables y con criterios de salida; pedir evidencia antes de conclusiones.
+Este repositorio está diseñado para usar exclusivamente modelos Anthropic/Claude en GitHub Copilot. La disponibilidad depende de la política Enterprise y versión del cliente. Si el nombre configurado no aparece en el selector de PyCharm, elegir únicamente otro Claude habilitado y actualizar `.github/agents/*.agent.md`.

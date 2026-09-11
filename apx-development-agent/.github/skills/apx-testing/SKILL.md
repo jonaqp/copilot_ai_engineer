@@ -1,24 +1,40 @@
 ---
 name: apx-testing
-description: Diseñar pruebas APX para cambios online o batch siguiendo los mecanismos de prueba presentes en el repositorio. Use when GitHub Copilot needs this repeatable capability inside the corresponding engineering workflow.
+description: "Revisar reportes de cobertura y exigir como baseline de APX al menos 80 por ciento sobre nuevo codigo cuando la fuente de cobertura lo permita. Usar antes de build, PR o certificacion."
 ---
 
-# Workflow
+# apx-testing
 
-1. Detectar framework y patrones de test reales.
-2. Cubrir casos nominales, límites, errores y reintentos relevantes.
-3. Mockear solo fronteras externas necesarias.
-4. Evitar inventar harnesses inexistentes.
-5. Ejecutar pruebas y reportar cobertura cualitativa.
+## Objetivo
 
-# Guardrails
+Aplicar un flujo repetible y auditable para esta capacidad dentro de GitHub Copilot. Usar evidencia del repositorio, parametros del usuario y referencias aprobadas; no completar datos corporativos por suposicion.
 
-- Basar conclusiones en evidencia observable del repositorio, herramientas o fuentes autorizadas.
-- No inventar estándares internos, APIs, IDs, aprobaciones ni resultados de pruebas.
-- Minimizar privilegios y evitar secretos en prompts, logs, commits o archivos generados.
-- Separar hechos, supuestos y recomendaciones.
-- Antes de acciones irreversibles o de escritura externa, exigir confirmación cuando no esté explícitamente autorizada.
+## Flujo
 
-# Output
+1. Obtener reporte de cobertura de pipeline.
+2. Ejecutar `scripts/review_apx_coverage.py --threshold 80`.
+3. No confundir cobertura global con cobertura de nuevo codigo.
+4. Usar el Quality Gate oficial como evidencia final.
 
-Entregar una respuesta breve y trazable con: objetivo, evidencia, análisis/acción, validación y riesgos pendientes.
+## Script ejecutable
+
+Ejecutar `python scripts/review_apx_coverage.py --help` para ver parametros. Usar el script para la parte determinista y dejar al modelo la interpretacion, priorizacion y redaccion.
+
+## Referencias
+
+Consultar `references/bbva_peru_rules.md` antes de emitir una conclusion de cumplimiento. Si el documento interno vigente contradice esta Skill, prevalece el documento vigente.
+
+## Salida esperada
+
+Entregar: objetivo, entradas utilizadas, evidencia, hallazgos clasificados, riesgos, acciones propuestas, validaciones pendientes y cualquier aprobacion humana requerida.
+
+## Guardrails
+
+- No inventar IDs Jira, nombres de UUAA, endpoints, credenciales, APIs propietarias o resultados de pipeline.
+- Diferenciar hecho observado, inferencia y dato pendiente.
+- No afirmar que tests/quality gates pasaron sin evidencia de ejecucion.
+- No ejecutar acciones productivas o destructivas desde esta Skill.
+
+## Prompts de referencia
+
+Consultar `references/prompts_es.md` para ejemplos en español orientados a BBVA Perú.

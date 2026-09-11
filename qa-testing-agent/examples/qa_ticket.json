@@ -1,0 +1,25 @@
+{
+  "summary": "[Peru - Demo] DataX - UUAA - DEMO-123 - Pase a produccion",
+  "status": "Ready",
+  "issue_type": "Story",
+  "labels": [
+    "DATAX_DQA",
+    "CRQ"
+  ],
+  "team_backlog": "PER DAT Peru - Data Quality DE - DEMO",
+  "feature_link": "DEMO-FEATURE",
+  "item_type": "Technical",
+  "tech_stack": "Data X",
+  "dor": [
+    "taxonomia validada",
+    "ejecucion dev validada"
+  ],
+  "dod": [
+    "certificacion DQA aprobada"
+  ],
+  "acceptance_criteria": "Desarrollo y despliegue conforme a lineamientos vigentes.",
+  "story_points": 3,
+  "description": "Componente demo a certificar",
+  "test_link": "TEST-DEMO",
+  "fix_version": "tech-DEMO-datax-DEMO-0.0.1"
+}

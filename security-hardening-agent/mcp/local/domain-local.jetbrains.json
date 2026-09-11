@@ -1,9 +1,9 @@
 {
   "servers": {
-    "apx-context-demo": {
+    "security-local": {
       "command": "python",
       "args": [
-        "${workspaceFolder}/mcp/demo_server.py"
+        "mcp/local_servers/server.py"
       ]
     }
   }

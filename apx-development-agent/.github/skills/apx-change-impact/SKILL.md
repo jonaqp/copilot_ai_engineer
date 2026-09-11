@@ -1,24 +1,40 @@
 ---
 name: apx-change-impact
-description: Analizar impacto de cambios APX sobre componentes, contratos, jobs, servicios y consumidores usando evidencia de repositorio y MCP. Use when GitHub Copilot needs this repeatable capability inside the corresponding engineering workflow.
+description: "Extraer dependencias Maven/modulos y generar un mapa de impacto tecnico para cambios APX. Usar para responder que componentes pueden verse afectados por una modificacion."
 ---
 
-# Workflow
+# apx-change-impact
 
-1. Identificar archivo/componente origen y naturaleza del cambio.
-2. Buscar referencias, dependencias y contratos afectados.
-3. Construir lista de impactos directos e indirectos con evidencia.
-4. Clasificar riesgo y pruebas de regresión recomendadas.
-5. No afirmar ausencia de impacto si la búsqueda fue parcial.
+## Objetivo
 
-# Guardrails
+Aplicar un flujo repetible y auditable para esta capacidad dentro de GitHub Copilot. Usar evidencia del repositorio, parametros del usuario y referencias aprobadas; no completar datos corporativos por suposicion.
 
-- Basar conclusiones en evidencia observable del repositorio, herramientas o fuentes autorizadas.
-- No inventar estándares internos, APIs, IDs, aprobaciones ni resultados de pruebas.
-- Minimizar privilegios y evitar secretos en prompts, logs, commits o archivos generados.
-- Separar hechos, supuestos y recomendaciones.
-- Antes de acciones irreversibles o de escritura externa, exigir confirmación cuando no esté explícitamente autorizada.
+## Flujo
 
-# Output
+1. Ejecutar `scripts/analyze_apx_dependencies.py` para Maven.
+2. Consultar repos/PR y consumidores visibles por MCP.
+3. Agregar dependencias runtime/catalogo solo si hay evidencia.
+4. Entregar impacto confirmado, probable y desconocido.
 
-Entregar una respuesta breve y trazable con: objetivo, evidencia, análisis/acción, validación y riesgos pendientes.
+## Script ejecutable
+
+Ejecutar `python scripts/analyze_apx_dependencies.py --help` para ver parametros. Usar el script para la parte determinista y dejar al modelo la interpretacion, priorizacion y redaccion.
+
+## Referencias
+
+Consultar `references/bbva_peru_rules.md` antes de emitir una conclusion de cumplimiento. Si el documento interno vigente contradice esta Skill, prevalece el documento vigente.
+
+## Salida esperada
+
+Entregar: objetivo, entradas utilizadas, evidencia, hallazgos clasificados, riesgos, acciones propuestas, validaciones pendientes y cualquier aprobacion humana requerida.
+
+## Guardrails
+
+- No inventar IDs Jira, nombres de UUAA, endpoints, credenciales, APIs propietarias o resultados de pipeline.
+- Diferenciar hecho observado, inferencia y dato pendiente.
+- No afirmar que tests/quality gates pasaron sin evidencia de ejecucion.
+- No ejecutar acciones productivas o destructivas desde esta Skill.
+
+## Prompts de referencia
+
+Consultar `references/prompts_es.md` para ejemplos en español orientados a BBVA Perú.
