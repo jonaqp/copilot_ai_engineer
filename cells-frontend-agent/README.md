@@ -8,7 +8,7 @@ Asistente de desarrollo frontend orientado a componentes Cells, accesibilidad, c
 - Perfil GitHub Copilot en `.github/agents/cells-frontend-agent.agent.md`.
 - Skills reutilizables en `.github/skills/`.
 - Configuración oficial de GitHub MCP Server para VS Code en `.vscode/mcp.json`.
-- MCP local de demostración sin datos corporativos en `mcp/demo_server.py`.
+- MCP local de demostración sin datos corporativos en `.github/mcp/demo_server.py`.
 - Guías de modelo, MCP, seguridad y uso.
 - Tests de humo con pytest.
 
