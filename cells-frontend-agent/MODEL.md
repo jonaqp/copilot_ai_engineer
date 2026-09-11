@@ -1,0 +1,16 @@
+# Modelo recomendado
+
+## Principal: GPT-5.6 Sol
+
+Se recomienda para **Cells / Frontend Agent** porque el flujo requiere razonamiento sobre código, cambios multiarchivo y validación técnica.
+
+## Alternativa
+
+GPT-5.3-Codex.
+
+## Política práctica
+
+- Usar el modelo principal para cambios, análisis de riesgo o decisiones multi-step.
+- Usar un modelo rápido para clasificación, resumen o transformación mecánica cuando el riesgo sea bajo.
+- No depender del nombre del modelo en la lógica del agente; la disponibilidad depende del plan y del entorno de Copilot.
+- Mantener instrucciones cortas, verificables y con criterios de salida; pedir evidencia antes de conclusiones.

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Cells Component Development"
+  short_description: "Reusable engineering workflow for Cells/frontend"

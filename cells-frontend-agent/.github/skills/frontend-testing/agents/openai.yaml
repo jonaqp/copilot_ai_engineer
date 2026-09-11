@@ -1,0 +1,3 @@
+interface:
+  display_name: "Frontend Testing"
+  short_description: "Reusable engineering workflow for Cells/frontend"

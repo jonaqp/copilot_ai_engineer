@@ -1,0 +1,3 @@
+interface:
+  display_name: "Frontend Code Review"
+  short_description: "Reusable engineering workflow for Cells/frontend"

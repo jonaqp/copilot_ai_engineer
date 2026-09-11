@@ -1,0 +1,10 @@
+{
+  "servers": {
+    "frontend-context-demo": {
+      "command": "python",
+      "args": [
+        "${workspaceFolder}/mcp/demo_server.py"
+      ]
+    }
+  }
+}
