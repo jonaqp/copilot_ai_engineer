@@ -1,0 +1,3 @@
+interface:
+  display_name: "Workflow Triage"
+  short_description: "Reusable engineering workflow for Jira/workflow"

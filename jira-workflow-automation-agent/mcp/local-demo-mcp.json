@@ -1,0 +1,10 @@
+{
+  "servers": {
+    "jira-demo": {
+      "command": "python",
+      "args": [
+        "${workspaceFolder}/mcp/demo_server.py"
+      ]
+    }
+  }
+}
