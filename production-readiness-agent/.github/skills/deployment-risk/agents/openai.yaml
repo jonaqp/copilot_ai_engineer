@@ -1,3 +1,0 @@
-interface:
-  display_name: "Deployment Risk"
-  short_description: "Reusable engineering workflow for release/production"

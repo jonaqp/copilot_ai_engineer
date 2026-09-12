@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Guía básica Front-End UI</title>
+    <link rel="stylesheet" href="../reference-standards/styles-standard.css">
+</head>
+<body>
+    <main class="ux-local-page">
+        <header class="ux-local-page-header">
+            <h1 class="ux-local-title">Guía básica de interfaz</h1>
+            <p class="ux-local-muted">Ejemplo mínimo para que Copilot reutilice paneles, formularios y tablas sin inventar estilos.</p>
+        </header>
+
+        <div class="ux-local-stack">
+            <section class="ux-local-panel" aria-labelledby="panel-title">
+                <div class="ux-local-panel-header">
+                    <h2 class="ux-local-title" id="panel-title">Datos de ejemplo</h2>
+                </div>
+                <div class="ux-local-panel-body">
+                    <form class="ux-local-form" action="#" method="post">
+                        <div class="ux-local-field">
+                            <label class="ux-local-label" for="name">Nombre</label>
+                            <input class="ux-local-input" id="name" name="name" type="text" autocomplete="name">
+                        </div>
+                        <div class="ux-local-field">
+                            <label class="ux-local-label" for="type">Tipo</label>
+                            <select class="ux-local-select" id="type" name="type">
+                                <option value="">Selecciona una opción</option>
+                                <option value="demo">Demo</option>
+                                <option value="test">Prueba</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="ux-local-panel-footer">
+                    <button class="ux-local-btn-secondary" type="button">Cancelar</button>
+                    <button class="ux-local-btn-primary" type="button">Guardar</button>
+                </div>
+            </section>
+
+            <section aria-labelledby="table-title">
+                <h2 class="ux-local-title" id="table-title">Registros</h2>
+                <div class="ux-local-table-container">
+                    <table class="ux-local-table">
+                        <caption class="ux-local-sr-only">Registros de demostración</caption>
+                        <thead>
+                            <tr>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Tipo</th>
+                                <th scope="col">Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Ejemplo A</td>
+                                <td>Demo</td>
+                                <td><button class="ux-local-btn-link" type="button">Editar</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </main>
+</body>
+</html>

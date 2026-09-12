@@ -36,3 +36,8 @@ python -m venv .venv
 pip install -r requirements.txt
 python app.py
 ```
+
+
+## Guia paso a paso
+
+Consultar [`USAGE_GUIDE.md`](USAGE_GUIDE.md) para preparar PyCharm, Copilot, MCP y ejecutar las Skills individualmente o de forma encadenada.
