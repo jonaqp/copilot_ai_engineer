@@ -11,10 +11,10 @@ Crear tablas semánticas, accesibles y coherentes con `table-standard.html`.
 ## Inputs
 - Columnas y tipo de datos.
 - Acciones disponibles por fila, si existen.
-- `reference-standards/table-standard.html` y `styles-standard.css`.
+- `.github/reference-standards/table-standard.html` y `styles-standard.css`.
 
 ## Workflow & Instructions
-1. Partir de `reference-standards/table-standard.html`.
+1. Partir de `.github/reference-standards/table-standard.html`.
 2. Usar `<caption>` descriptivo; puede ser visualmente oculto con `ux-local-sr-only` si el diseño no requiere caption visible.
 3. Usar `<th scope="col">` en cabeceras; usar `scope="row"` si la primera celda identifica una fila.
 4. Mantener acciones con botones/enlaces reales y nombres claros.

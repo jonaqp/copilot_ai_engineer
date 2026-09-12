@@ -12,7 +12,7 @@ def main() -> int:
     required = [
         root / ".github" / "copilot-instructions.md",
         root / ".github" / "agents" / "frontend-ui.agent.md",
-        root / "reference-standards" / "styles-standard.css",
+        root / ".github/reference-standards" / "styles-standard.css",
         root / "examples" / "basic-guide.html",
     ]
     for path in required:
@@ -33,7 +33,7 @@ def main() -> int:
             failures.append(f"Skill sin description: {skill.relative_to(root)}")
 
     validator = root / "scripts" / "style_validator.py"
-    html_files = list((root / "reference-standards").glob("*.html")) + list((root / "examples").glob("*.html"))
+    html_files = list((root / ".github/reference-standards").glob("*.html")) + list((root / "examples").glob("*.html"))
     for html in html_files:
         result = subprocess.run([sys.executable, str(validator), "--file", str(html)], capture_output=True, text=True)
         if result.returncode != 0:

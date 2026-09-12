@@ -98,7 +98,7 @@ def main() -> int:
     root = Path(__file__).resolve().parent.parent
     parser = argparse.ArgumentParser(description="Valida HTML contra el estándar Front-End local.")
     parser.add_argument("--file", required=True, help="Archivo HTML a validar")
-    parser.add_argument("--css", default=str(root / "reference-standards" / "styles-standard.css"), help="CSS de referencia")
+    parser.add_argument("--css", default=str(root / ".github/reference-standards" / "styles-standard.css"), help="CSS de referencia")
     args = parser.parse_args()
     html_path = Path(args.file).resolve()
     css_path = Path(args.css).resolve()

@@ -10,8 +10,8 @@ Generar componentes consistentes a partir de las referencias del repositorio.
 
 ## Inputs
 - Requisito del componente.
-- `reference-standards/styles-standard.css`.
-- Referencia HTML más cercana en `reference-standards/`.
+- `.github/reference-standards/styles-standard.css`.
+- Referencia HTML más cercana en `.github/reference-standards/`.
 
 ## Workflow & Instructions
 1. Identificar el tipo de componente y abrir la referencia más cercana.

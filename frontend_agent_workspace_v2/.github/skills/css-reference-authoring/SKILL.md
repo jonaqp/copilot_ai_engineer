@@ -1,6 +1,6 @@
 ---
 name: css-reference-authoring
-description: Crear o ampliar estándares CSS reutilizables del proyecto. Usar cuando falten tokens, estados o clases `ux-local-*`, cuando se pida definir una referencia visual compartida, o cuando un componente requiera estilos nuevos que deben incorporarse primero a `reference-standards/styles-standard.css`.
+description: Crear o ampliar estándares CSS reutilizables del proyecto. Usar cuando falten tokens, estados o clases `ux-local-*`, cuando se pida definir una referencia visual compartida, o cuando un componente requiera estilos nuevos que deben incorporarse primero a `.github/reference-standards/styles-standard.css`.
 ---
 
 # CSS Reference Authoring
@@ -9,7 +9,7 @@ description: Crear o ampliar estándares CSS reutilizables del proyecto. Usar cu
 Extender el estándar visual compartido sin generar CSS aislado por componente.
 
 ## Inputs
-- `reference-standards/styles-standard.css`.
+- `.github/reference-standards/styles-standard.css`.
 - HTML de referencia relacionado, si existe.
 - Requisito visual o funcional solicitado.
 
@@ -25,7 +25,7 @@ Extender el estándar visual compartido sin generar CSS aislado por componente.
 9. Ejecutar `python scripts/workspace_check.py`.
 
 ## Expected Output
-- CSS reutilizable en `reference-standards/styles-standard.css`.
+- CSS reutilizable en `.github/reference-standards/styles-standard.css`.
 - Referencia HTML actualizada cuando aplique.
 - Resumen de tokens/clases añadidos o reutilizados.
 

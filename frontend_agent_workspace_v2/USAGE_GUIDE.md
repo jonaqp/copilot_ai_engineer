@@ -13,7 +13,7 @@ Este workspace convierte el agente Front-End en una configuración reutilizable 
     ui-component-builder/
     accessible-table-builder/
     frontend-quality-gate/
-reference-standards/
+.github/reference-standards/
   styles-standard.css
   panel-standard.html
   form-standard.html
@@ -80,7 +80,7 @@ Abre `examples/basic-guide.html`. Incluye:
 
 ## 6. Regla para ampliar CSS
 
-Si un componente necesita un estilo que no existe, no crees una clase aislada dentro de la vista. Pide al agente que use `css-reference-authoring`, agregue el patrón a `reference-standards/styles-standard.css`, actualice una referencia HTML y ejecute `workspace_check.py`.
+Si un componente necesita un estilo que no existe, no crees una clase aislada dentro de la vista. Pide al agente que use `css-reference-authoring`, agregue el patrón a `.github/reference-standards/styles-standard.css`, actualice una referencia HTML y ejecute `workspace_check.py`.
 
 ## 7. Flujo recomendado
 

@@ -7,7 +7,7 @@ Construir interfaces consistentes, accesibles y mantenibles usando primero los e
 
 ## Flujo obligatorio
 1. Diagnosticar el pedido y localizar los archivos relevantes.
-2. Cargar solo el contexto necesario de `reference-standards/` y de la skill pertinente en `.github/skills/`.
+2. Cargar solo el contexto necesario de `.github/reference-standards/` y de la skill pertinente en `.github/skills/`.
 3. Proponer un plan corto antes de modificar varios archivos o crear un componente nuevo.
 4. Implementar reutilizando tokens, clases y estructuras existentes.
 5. Validar con `python scripts/style_validator.py --file <html>` y, cuando corresponda, `python scripts/workspace_check.py`.
@@ -15,7 +15,7 @@ Construir interfaces consistentes, accesibles y mantenibles usando primero los e
 7. Entregar un resumen breve de archivos modificados, validaciones ejecutadas y cualquier desviación pendiente.
 
 ## Estándares de diseño
-- Leer `reference-standards/styles-standard.css` antes de escribir CSS o HTML visual.
+- Leer `.github/reference-standards/styles-standard.css` antes de escribir CSS o HTML visual.
 - Reutilizar variables CSS y clases `ux-local-*`.
 - Evitar estilos inline salvo que el usuario los solicite explícitamente.
 - No agregar Bootstrap, Tailwind u otro framework visual sin solicitud explícita.

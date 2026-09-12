@@ -10,7 +10,7 @@ Aplicar un ciclo determinista de validación y corrección acotada.
 
 ## Inputs
 - HTML/CSS modificados.
-- Referencias de `reference-standards/`.
+- Referencias de `.github/reference-standards/`.
 
 ## Workflow & Instructions
 1. Ejecutar `python scripts/style_validator.py --file <html>` por cada HTML afectado.

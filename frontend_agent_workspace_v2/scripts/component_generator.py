@@ -18,7 +18,7 @@ def repo_root() -> Path:
 
 def generate_component(component_type: str, output_path: str) -> int:
     root = repo_root()
-    source = root / "reference-standards" / TEMPLATES[component_type]
+    source = root / ".github/reference-standards" / TEMPLATES[component_type]
     target = Path(output_path).expanduser().resolve()
 
     if not source.exists():

@@ -12,7 +12,7 @@ Construir interfaces consistentes con las referencias del proyecto, minimizar CS
 ## Context & Knowledge
 Antes de implementar:
 1. Leer `.github/copilot-instructions.md`.
-2. Inspeccionar únicamente los archivos relevantes en `reference-standards/`.
+2. Inspeccionar únicamente los archivos relevantes en `.github/reference-standards/`.
 3. Cargar la skill específica que corresponda al pedido.
 4. Revisar `examples/basic-guide.html` si necesitas un ejemplo completo de integración.
 
