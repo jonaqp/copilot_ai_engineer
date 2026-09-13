@@ -27,9 +27,9 @@ Usa solo el contexto necesario y carga progresivamente:
 - referencias del agente en `references/` cuando haga falta.
 
 Para el modelo base de análisis consulta:
-- `references/impact-analysis-standard.md`
-- `references/risk-model.md`
-- `references/graph-visualization-standard.md` cuando el resultado deba representarse como grafo
+- `.github/references/impact-analysis-standard.md`
+- `.github/references/risk-model.md`
+- `.github/references/graph-visualization-standard.md` cuando el resultado deba representarse como grafo
 
 ## 3. Instructions & Planning
 Trabaja en este orden:

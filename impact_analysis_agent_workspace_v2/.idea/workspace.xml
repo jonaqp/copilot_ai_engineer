@@ -10,6 +10,12 @@
       <change afterPath="$PROJECT_DIR$/../frontend_agent_workspace_v2/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../functional_test_agent_v2/tests/test_domain.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../functional_test_agent_v2/tests/test_flask_functional.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/agents/impact-radar.agent.md" beforeDir="false" afterPath="$PROJECT_DIR$/.github/agents/impact-radar.agent.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/references/graph-visualization-standard.md" beforeDir="false" afterPath="$PROJECT_DIR$/.github/references/graph-visualization-standard.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/references/impact-analysis-standard.md" beforeDir="false" afterPath="$PROJECT_DIR$/.github/references/impact-analysis-standard.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/references/risk-model.md" beforeDir="false" afterPath="$PROJECT_DIR$/.github/references/risk-model.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +26,17 @@
     <persistenceIdMap>
       <entry key="_D:/bbva/HOLDING_JONATHAN/copilot_ai_engineer/impact_analysis_agent_workspace_v2" value="3JI6fVKEo6jH0lzHfLehImNwAEt" />
     </persistenceIdMap>
+  </component>
+  <component name="FlaskConsoleOptions" custom-start-script="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))">
+    <envs>
+      <env key="FLASK_APP" value="app" />
+    </envs>
+    <option name="myCustomStartScript" value="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))" />
+    <option name="myEnvs">
+      <map>
+        <entry key="FLASK_APP" value="app" />
+      </map>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -52,10 +69,15 @@
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.keymap",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\bbva\HOLDING_JONATHAN\copilot_ai_engineer\impact_analysis_agent_workspace_v2\.github" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -72,7 +94,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1789336348981</updated>
-      <workItem from="1789336350837" duration="615000" />
+      <workItem from="1789336350837" duration="1302000" />
     </task>
     <servers />
   </component>
