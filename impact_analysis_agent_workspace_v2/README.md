@@ -5,9 +5,9 @@ Agente predictivo de análisis de impacto para repositorios de software. Convier
 ## Qué incluye
 - `.github/agents/impact-radar.agent.md`: agente principal.
 - `.github/skills/`: cuatro skills especializadas.
-- `references/`: estándar y modelo de riesgo.
+- `references/`: estándar de impacto, modelo de riesgo y estándar del grafo visual.
 - `scripts/`: herramientas deterministas para grafo, escaneo, impacto y gate.
-- `demo_arch_radar/`: demo Python + Flask con una interfaz web.
+- `demo_arch_radar/`: demo Python + Flask con una interfaz web y grafo interactivo.
 
 ## Capacidades
 - Dependencias directas e indirectas.
@@ -16,3 +16,8 @@ Agente predictivo de análisis de impacto para repositorios de software. Convier
 - Score de riesgo 0-100.
 - Recomendaciones de tests Shift-Left.
 - Decisión GO / GO WITH CONDITIONS / NO-GO.
+- Radar visual con pan/zoom, inspección de nodos y filtro de impacto.
+- Dependencias ocultas resaltadas visualmente.
+
+## Visualización
+La demo usa **Cytoscape.js 3.34.x** desde CDN para renderizar el grafo en el navegador. No agrega dependencias Python nuevas. Si el CDN no está disponible, la pantalla muestra un fallback textual y el análisis funcional sigue operando.

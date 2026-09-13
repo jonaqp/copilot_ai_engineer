@@ -1,13 +1,21 @@
-# Validation Report
+# Validation Report — Impact Radar Visual
 
-Validaciones ejecutadas sobre el workspace:
+## Resultado
+PASS con la salvedad de que Flask no está instalado en el entorno de construcción actual.
 
-- Grafo demo: PASS (10 componentes, 10 dependencias).
-- Tests del motor: PASS (4 tests).
-- Skill `dependency-graph-builder`: válido.
-- Skill `change-impact-analyzer`: válido.
-- Skill `risk-predictor`: válido.
-- Skill `shift-left-gate`: válido.
-- Escenario `pricing-service` + `contract`: detecta `checkout-api` y `cart-service` como dependientes directos, `storefront-web` como indirecto y la relación no documentada de `cart-service` como señal de riesgo.
+## Validaciones ejecutadas
+- `python -m compileall` sobre `demo_arch_radar/` y `scripts/`: PASS.
+- `pytest -q` sobre el motor de impacto: **4 passed**.
+- `node --check demo_arch_radar/static/impact-graph.js`: PASS.
+- `scripts/analyze_impact.py` para `pricing-service / contract`: PASS; score 81, nivel Crítico, decisión NO-GO.
+- Estructura visual agregada: Cytoscape.js, inspector de nodos, leyenda, filtro `Solo impacto`, pan/zoom/fit y fallback textual.
 
-La UI Flask está incluida, pero Flask no estaba instalado en el entorno de empaquetado; se ejecuta localmente tras `pip install -r requirements.txt`.
+## Limitación del entorno
+No se pudo ejecutar la vista Flask con test client porque Flask no está instalado en este runtime. El proyecto conserva `requirements.txt`; ejecutar `pip install -r requirements.txt` antes de iniciar la demo.
+
+## Semántica visual
+- raíz: rojo;
+- L1: amarillo;
+- L2+: cyan;
+- no impactados: azul/gris;
+- dependencia oculta: línea roja discontinua.

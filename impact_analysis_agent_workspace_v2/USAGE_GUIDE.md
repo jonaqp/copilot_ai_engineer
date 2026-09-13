@@ -17,12 +17,23 @@ python demo_arch_radar/app.py
 
 Abrir `http://127.0.0.1:5000`.
 
+La pantalla incluye ahora un **Radar visual de impacto** construido con Cytoscape.js:
+- rojo: componente modificado;
+- amarillo: impacto directo (L1);
+- cyan: impacto indirecto (L2+);
+- gris: resto del ecosistema;
+- línea roja discontinua: dependencia oculta/no documentada.
+
+Puedes hacer zoom, mover el grafo, seleccionar nodos, centrarlo y activar `Solo impacto` para aislar el efecto dominó.
+
+> La librería Cytoscape.js se carga desde CDN en esta demo. El motor Python y los análisis CLI no dependen de conexión externa.
+
 ## 3. Ejecutar análisis por CLI
 
 ```bash
-python scripts/analyze_impact.py \
-  --graph demo_arch_radar/sample_system/architecture.json \
-  --component pricing-service \
+python scripts/analyze_impact.py \\
+  --graph demo_arch_radar/sample_system/architecture.json \\
+  --component pricing-service \\
   --change-type contract
 ```
 
@@ -35,10 +46,10 @@ python scripts/analyze_impact.py --graph demo_arch_radar/sample_system/architect
 ## 4. Ejecutar el gate preventivo
 
 ```bash
-python scripts/quality_gate.py \
-  --graph demo_arch_radar/sample_system/architecture.json \
-  --component order-db \
-  --change-type schema \
+python scripts/quality_gate.py \\
+  --graph demo_arch_radar/sample_system/architecture.json \\
+  --component order-db \\
+  --change-type schema \\
   --tested checkout-api notification-service analytics-consumer
 ```
 
@@ -46,9 +57,13 @@ El script devuelve código distinto de cero si el cambio queda en NO-GO.
 
 ## 5. Usar el agente en GitHub Copilot
 
-Selecciona `impact-radar` y prueba un prompt como:
+Selecciona `impact-radar` y prueba:
 
 > Analiza el impacto de cambiar la respuesta de `pricing-service`. Construye el mapa de dependencias, identifica efecto dominó, puntúa el riesgo y dime qué tests debo ejecutar antes del deploy. No modifiques código todavía.
+
+Para pedir el radar visual:
+
+> Analiza el cambio de `pricing-service` y actualiza la vista Impact Radar para mostrar visualmente el nodo raíz, impactos L1/L2+, dependencias ocultas y el gate recomendado. Mantén el grafo como una proyección de evidencias del repositorio.
 
 Para un cambio real:
 

@@ -11,3 +11,6 @@ Revisa el diff actual. Detecta las `class`, `def`, endpoints o contratos modific
 
 ## Caso 4 — preparación de pruebas
 Para el cambio actual, no implementes todavía. Dime primero qué pruebas de contrato, integración, funcionales y regresión son necesarias para cubrir todas las rutas de impacto de criticidad alta.
+
+## Visualizar el efecto dominó
+> Analiza `pricing-service / contract` y representa el impacto en el radar visual. Resalta el componente raíz, los dependientes directos L1, los transitivos L2+ y cualquier dependencia no documentada. Permite inspeccionar criticidad y owner por nodo.

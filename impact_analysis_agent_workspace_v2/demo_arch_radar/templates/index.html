@@ -11,24 +11,24 @@
     <div>
       <span class="eyebrow">Predictive Change Impact Copilot</span>
       <h1>Impact Radar</h1>
-      <p>Detecta conexiones ocultas, predice efecto dominó y define el gate Shift-Left antes del deploy.</p>
+      <p>Detecta conexiones ocultas, visualiza el efecto dominó y define el gate Shift-Left antes del deploy.</p>
     </div>
-    <div class="radar">◎</div>
+    <div class="radar" aria-hidden="true"><span></span><i></i></div>
   </header>
 
   <main class="layout">
     <section class="card control-panel">
       <h2>Simular un cambio</h2>
       <form method="post">
-        <label>Componente</label>
-        <select name="component">
+        <label for="component">Componente</label>
+        <select id="component" name="component">
           {% for c in components %}
           <option value="{{ c.id }}" {% if selected == c.id %}selected{% endif %}>{{ c.name }} · C{{ c.criticality }}</option>
           {% endfor %}
         </select>
 
-        <label>Tipo de cambio</label>
-        <select name="change_type">
+        <label for="change_type">Tipo de cambio</label>
+        <select id="change_type" name="change_type">
           {% for t in ['behavior','performance','config','dependency','contract','schema'] %}
           <option value="{{ t }}" {% if change_type == t %}selected{% endif %}>{{ t }}</option>
           {% endfor %}
@@ -45,7 +45,45 @@
       <div class="metric"><span>Alcance</span><strong>{{ report.impacts|length }}</strong><small>componentes</small></div>
       <div class="metric"><span>Decisión</span><strong class="decision">{{ report.decision }}</strong><small>pre-deploy</small></div>
     </section>
+    {% else %}
+    <section class="card summary intro-summary">
+      <div><span class="eyebrow">Mapa vivo</span><h2>Explora el ecosistema</h2><p>Ejecuta un análisis para resaltar el nodo cambiado, impactos directos, indirectos y dependencias ocultas.</p></div>
+    </section>
+    {% endif %}
 
+    <section class="card full graph-card">
+      <div class="graph-heading">
+        <div>
+          <span class="eyebrow">Dependency Graph</span>
+          <h2>Radar visual de impacto</h2>
+          <p>{% if report %}Propagación desde <strong>{{ report.root.name }}</strong>.{% else %}Vista completa del ecosistema técnico.{% endif %}</p>
+        </div>
+        <div class="graph-actions">
+          <button id="fitGraph" type="button" class="secondary-button">Centrar</button>
+          <button id="toggleImpact" type="button" class="secondary-button" {% if not report %}disabled{% endif %}>Solo impacto</button>
+        </div>
+      </div>
+
+      <div class="graph-shell">
+        <div id="impactGraph" role="img" aria-label="Grafo de dependencias y propagación de impacto"></div>
+        <aside id="nodeInspector" class="node-inspector">
+          <span class="eyebrow">Inspector</span>
+          <h3>Selecciona un nodo</h3>
+          <p>Haz clic sobre un componente para ver criticidad, owner y su relación con el cambio.</p>
+        </aside>
+      </div>
+
+      <div class="legend" aria-label="Leyenda del grafo">
+        <span><i class="legend-dot root-dot"></i>Cambio raíz</span>
+        <span><i class="legend-dot direct-dot"></i>Impacto directo</span>
+        <span><i class="legend-dot indirect-dot"></i>Impacto indirecto</span>
+        <span><i class="legend-dot normal-dot"></i>No impactado</span>
+        <span><i class="legend-line hidden-line"></i>Dependencia oculta</span>
+      </div>
+      <noscript><p class="graph-warning">Activa JavaScript para visualizar el grafo interactivo.</p></noscript>
+    </section>
+
+    {% if report %}
     <section class="card full">
       <div class="section-title"><h2>Efecto dominó</h2><span>{{ report.root.name }}</span></div>
       <div class="table-wrap">
@@ -78,5 +116,12 @@
     </section>
     {% endif %}
   </main>
+
+  <script id="graphData" type="application/json">{{ graph_data|tojson }}</script>
+  <script id="impactData" type="application/json">{{ report|tojson if report else 'null' }}</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.34.2/cytoscape.min.js"
+          crossorigin="anonymous"
+          onerror="document.documentElement.dataset.graphLib='failed'"></script>
+  <script src="{{ url_for('static', filename='impact-graph.js') }}"></script>
 </body>
 </html>

@@ -1,5 +1,8 @@
+from dataclasses import asdict
 from pathlib import Path
+
 from flask import Flask, render_template, request
+
 from loader import load_graph
 from impact_engine import ImpactAnalyzer
 
@@ -9,6 +12,14 @@ GRAPH_PATH = BASE / "sample_system" / "architecture.json"
 app = Flask(__name__)
 graph = load_graph(GRAPH_PATH)
 analyzer = ImpactAnalyzer(graph)
+
+
+def graph_payload():
+    """Return serialisable graph data for the visual impact radar."""
+    return {
+        "components": [asdict(component) for component in graph.components.values()],
+        "dependencies": [asdict(dependency) for dependency in graph.dependencies],
+    }
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -24,6 +35,7 @@ def index():
         selected=selected,
         change_type=change_type,
         report=report,
+        graph_data=graph_payload(),
     )
 
 

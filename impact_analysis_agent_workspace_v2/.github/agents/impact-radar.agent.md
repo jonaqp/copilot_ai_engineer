@@ -29,6 +29,7 @@ Usa solo el contexto necesario y carga progresivamente:
 Para el modelo base de análisis consulta:
 - `references/impact-analysis-standard.md`
 - `references/risk-model.md`
+- `references/graph-visualization-standard.md` cuando el resultado deba representarse como grafo
 
 ## 3. Instructions & Planning
 Trabaja en este orden:
@@ -72,6 +73,8 @@ Skills disponibles:
 - `change-impact-analyzer`
 - `risk-predictor`
 - `shift-left-gate`
+
+Cuando el usuario pida una representación visual, genera o actualiza una vista de grafo que respete `references/graph-visualization-standard.md`. La visualización debe ser una proyección del análisis y nunca una fuente nueva de dependencias.
 
 Prefiere los scripts de `scripts/` para análisis repetible antes que cálculos manuales.
 
