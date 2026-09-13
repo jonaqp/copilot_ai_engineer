@@ -2,226 +2,203 @@
   const container = document.getElementById('impactGraph');
   if (!container) return;
 
-  const graphData = JSON.parse(document.getElementById('graphData').textContent || '{}');
-  const impactData = JSON.parse(document.getElementById('impactData').textContent || 'null');
+  const graphData = JSON.parse(document.getElementById('graphData')?.textContent || '{}');
+  const impactData = JSON.parse(document.getElementById('impactData')?.textContent || 'null');
   const inspector = document.getElementById('nodeInspector');
   const toggleButton = document.getElementById('toggleImpact');
   const fitButton = document.getElementById('fitGraph');
 
+  const components = graphData.components || [];
+  const dependencies = graphData.dependencies || [];
+  const componentById = new Map(components.map(c => [c.id, c]));
   const impactById = new Map((impactData?.impacts || []).map(item => [item.component, item]));
   const rootId = impactData?.root?.id || null;
   const impactedIds = new Set([rootId, ...impactById.keys()].filter(Boolean));
 
   const statusFor = id => {
     if (id === rootId) return 'root';
-    const item = impactById.get(id);
-    if (!item) return 'normal';
-    return item.depth === 1 ? 'direct' : 'indirect';
+    const impact = impactById.get(id);
+    if (!impact) return 'normal';
+    return impact.depth === 1 ? 'direct' : 'indirect';
   };
 
-  const elements = [];
-  for (const component of graphData.components || []) {
+  const SVG_NS = 'http://www.w3.org/2000/svg';
+  const svg = document.createElementNS(SVG_NS, 'svg');
+  svg.setAttribute('viewBox', '0 0 1100 640');
+  svg.setAttribute('class', 'impact-svg');
+  svg.setAttribute('aria-label', 'Grafo visual de dependencias de la aplicacion');
+  svg.setAttribute('role', 'img');
+
+  const defs = document.createElementNS(SVG_NS, 'defs');
+  defs.innerHTML = `
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"></path>
+    </marker>
+    <filter id="glow"><feGaussianBlur stdDeviation="5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  `;
+  svg.appendChild(defs);
+
+  const edgeLayer = document.createElementNS(SVG_NS, 'g');
+  edgeLayer.setAttribute('class', 'edge-layer');
+  const nodeLayer = document.createElementNS(SVG_NS, 'g');
+  nodeLayer.setAttribute('class', 'node-layer');
+  svg.append(edgeLayer, nodeLayer);
+
+  const layout = buildLayout(components);
+  dependencies.forEach((dep, index) => drawEdge(dep, index));
+  components.forEach(drawNode);
+  container.replaceChildren(svg);
+
+  function buildLayout(items) {
+    const positions = new Map();
+    const cx = 540, cy = 320;
+    const root = rootId ? items.find(c => c.id === rootId) : null;
+    if (root) positions.set(root.id, {x: cx, y: cy});
+
+    const impacted = items.filter(c => c.id !== rootId && impactedIds.has(c.id));
+    const unaffected = items.filter(c => !impactedIds.has(c.id));
+
+    impacted.sort((a, b) => (impactById.get(a.id)?.depth || 0) - (impactById.get(b.id)?.depth || 0));
+    impacted.forEach((item, i) => {
+      const depth = impactById.get(item.id)?.depth || 1;
+      const sameDepth = impacted.filter(c => (impactById.get(c.id)?.depth || 1) === depth);
+      const posInDepth = sameDepth.findIndex(c => c.id === item.id);
+      const radius = 155 + (depth - 1) * 120;
+      const start = -Math.PI / 2;
+      const angle = start + ((posInDepth + 1) / (sameDepth.length + 1)) * Math.PI * 2;
+      positions.set(item.id, {x: cx + Math.cos(angle) * radius, y: cy + Math.sin(angle) * radius});
+    });
+
+    unaffected.forEach((item, i) => {
+      const radius = 270;
+      const angle = (i / Math.max(unaffected.length, 1)) * Math.PI * 2;
+      if (!positions.has(item.id)) positions.set(item.id, {x: cx + Math.cos(angle) * radius, y: cy + Math.sin(angle) * radius});
+    });
+
+    if (!root) {
+      items.forEach((item, i) => {
+        const radius = 245;
+        const angle = (i / Math.max(items.length, 1)) * Math.PI * 2 - Math.PI / 2;
+        positions.set(item.id, {x: cx + Math.cos(angle) * radius, y: cy + Math.sin(angle) * radius});
+      });
+    }
+    return positions;
+  }
+
+  function drawEdge(dep, index) {
+    const source = layout.get(dep.source);
+    const target = layout.get(dep.target);
+    if (!source || !target) return;
+
+    const group = document.createElementNS(SVG_NS, 'g');
+    const onImpact = impactedIds.has(dep.source) && impactedIds.has(dep.target);
+    group.setAttribute('class', `graph-edge ${dep.documented ? 'documented' : 'hidden'} ${onImpact ? 'impact-edge' : ''}`);
+    group.dataset.index = index;
+
+    const line = document.createElementNS(SVG_NS, 'line');
+    line.setAttribute('x1', source.x); line.setAttribute('y1', source.y);
+    line.setAttribute('x2', target.x); line.setAttribute('y2', target.y);
+    line.setAttribute('marker-end', 'url(#arrow)');
+    line.setAttribute('vector-effect', 'non-scaling-stroke');
+
+    const label = document.createElementNS(SVG_NS, 'text');
+    label.setAttribute('x', (source.x + target.x) / 2);
+    label.setAttribute('y', (source.y + target.y) / 2 - 7);
+    label.setAttribute('text-anchor', 'middle');
+    label.textContent = dep.kind;
+
+    group.append(line, label);
+    edgeLayer.appendChild(group);
+  }
+
+  function drawNode(component) {
+    const p = layout.get(component.id);
+    if (!p) return;
+    const status = statusFor(component.id);
     const impact = impactById.get(component.id);
-    elements.push({
-      group: 'nodes',
-      data: {
-        ...component,
-        label: component.name,
-        status: statusFor(component.id),
-        impactDepth: impact?.depth || 0,
-        validation: impact?.validation || '',
-      },
-      classes: statusFor(component.id),
+    const group = document.createElementNS(SVG_NS, 'g');
+    group.setAttribute('class', `graph-node ${status}`);
+    group.setAttribute('transform', `translate(${p.x} ${p.y})`);
+    group.dataset.id = component.id;
+    group.setAttribute('tabindex', '0');
+    group.setAttribute('role', 'button');
+    group.setAttribute('aria-label', `${component.name}, ${status}`);
+
+    const circle = document.createElementNS(SVG_NS, 'circle');
+    circle.setAttribute('r', status === 'root' ? '54' : '45');
+    if (status === 'root') circle.setAttribute('filter', 'url(#glow)');
+
+    const title = document.createElementNS(SVG_NS, 'text');
+    title.setAttribute('class', 'node-title');
+    title.setAttribute('text-anchor', 'middle');
+    wrapSvgText(title, component.name, 15);
+
+    const meta = document.createElementNS(SVG_NS, 'text');
+    meta.setAttribute('class', 'node-meta');
+    meta.setAttribute('text-anchor', 'middle');
+    meta.setAttribute('y', '30');
+    meta.textContent = status === 'root' ? 'ROOT' : impact ? `L${impact.depth}` : component.kind;
+
+    group.append(circle, title, meta);
+    group.addEventListener('click', () => updateInspector(component, status, impact));
+    group.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') updateInspector(component, status, impact); });
+    nodeLayer.appendChild(group);
+  }
+
+  function wrapSvgText(textNode, label, maxChars) {
+    const words = label.split(/\s+/);
+    const lines = [];
+    let current = '';
+    words.forEach(word => {
+      const next = current ? `${current} ${word}` : word;
+      if (next.length > maxChars && current) { lines.push(current); current = word; } else current = next;
+    });
+    if (current) lines.push(current);
+    const offset = -((lines.length - 1) * 8);
+    lines.forEach((line, i) => {
+      const tspan = document.createElementNS(SVG_NS, 'tspan');
+      tspan.setAttribute('x', '0');
+      tspan.setAttribute('dy', i === 0 ? String(offset) : '16');
+      tspan.textContent = line;
+      textNode.appendChild(tspan);
     });
   }
 
-  (graphData.dependencies || []).forEach((dependency, index) => {
-    const onImpactPath = impactedIds.has(dependency.source) && impactedIds.has(dependency.target);
-    elements.push({
-      group: 'edges',
-      data: {
-        id: `e-${index}-${dependency.source}-${dependency.target}`,
-        source: dependency.source,
-        target: dependency.target,
-        label: dependency.kind,
-        kind: dependency.kind,
-        documented: dependency.documented,
-        onImpactPath,
-      },
-      classes: `${dependency.documented ? 'documented' : 'hidden'} ${onImpactPath ? 'impact-edge' : ''}`,
-    });
-  });
-
-  const renderFallback = () => {
-    const impacted = impactData?.impacts || [];
-    const rows = impacted.length
-      ? impacted.map(item => `<li><strong>${item.component}</strong><span>L${item.depth}</span><small>${item.path.join(' → ')}</small></li>`).join('')
-      : '<li><strong>Ecosistema cargado</strong><small>La librería visual no está disponible. Ejecuta con acceso al CDN para el grafo interactivo.</small></li>';
-    container.innerHTML = `<div class="graph-fallback"><h3>Mapa de impacto</h3><ul>${rows}</ul></div>`;
-  };
-
-  if (typeof window.cytoscape !== 'function') {
-    renderFallback();
-    return;
-  }
-
-  const cy = window.cytoscape({
-    container,
-    elements,
-    wheelSensitivity: 0.18,
-    minZoom: 0.35,
-    maxZoom: 2.2,
-    style: [
-      {
-        selector: 'node',
-        style: {
-          'background-color': '#163b54',
-          'border-color': '#547086',
-          'border-width': 2,
-          'label': 'data(label)',
-          'color': '#eff8ff',
-          'font-size': 11,
-          'font-weight': 650,
-          'text-wrap': 'wrap',
-          'text-max-width': 105,
-          'text-valign': 'center',
-          'text-halign': 'center',
-          'width': 86,
-          'height': 86,
-          'overlay-opacity': 0,
-        },
-      },
-      {
-        selector: 'node.root',
-        style: {
-          'background-color': '#ff5f6d',
-          'border-color': '#ffd1d5',
-          'border-width': 4,
-          'width': 108,
-          'height': 108,
-          'font-size': 12,
-          'shadow-blur': 28,
-          'shadow-color': '#ff5f6d',
-          'shadow-opacity': 0.55,
-        },
-      },
-      {
-        selector: 'node.direct',
-        style: {
-          'background-color': '#ffc857',
-          'border-color': '#fff0b4',
-          'color': '#09151f',
-          'border-width': 3,
-        },
-      },
-      {
-        selector: 'node.indirect',
-        style: {
-          'background-color': '#43d3ff',
-          'border-color': '#bfeeff',
-          'color': '#07131f',
-          'border-width': 3,
-        },
-      },
-      {
-        selector: 'edge',
-        style: {
-          'width': 1.5,
-          'line-color': '#456277',
-          'target-arrow-color': '#456277',
-          'target-arrow-shape': 'triangle',
-          'curve-style': 'bezier',
-          'label': 'data(label)',
-          'font-size': 8,
-          'color': '#86a5ba',
-          'text-background-color': '#07131f',
-          'text-background-opacity': 0.8,
-          'text-background-padding': 2,
-          'text-rotation': 'autorotate',
-          'overlay-opacity': 0,
-        },
-      },
-      {
-        selector: 'edge.impact-edge',
-        style: {
-          'width': 3,
-          'line-color': '#43d3ff',
-          'target-arrow-color': '#43d3ff',
-          'color': '#c5f4ff',
-          'z-index': 10,
-        },
-      },
-      {
-        selector: 'edge.hidden',
-        style: {
-          'line-style': 'dashed',
-          'line-color': '#ff6b7a',
-          'target-arrow-color': '#ff6b7a',
-          'width': 3,
-          'color': '#ffb6bd',
-        },
-      },
-      {
-        selector: '.dimmed',
-        style: { 'opacity': 0.12 },
-      },
-      {
-        selector: 'node:selected',
-        style: {
-          'border-color': '#ffffff',
-          'border-width': 5,
-        },
-      },
-    ],
-    layout: impactData
-      ? { name: 'breadthfirst', roots: rootId ? `#${rootId}` : undefined, directed: true, spacingFactor: 1.3, padding: 35 }
-      : { name: 'cose', animate: false, padding: 35, nodeRepulsion: 520000, idealEdgeLength: 130 },
-  });
-
-  const updateInspector = node => {
-    const data = node.data();
-    const statusLabels = {
-      root: 'Cambio raíz',
-      direct: 'Impacto directo',
-      indirect: 'Impacto indirecto',
-      normal: 'No impactado',
-    };
+  function updateInspector(component, status, impact) {
+    const labels = {root: 'Cambio raiz', direct: 'Impacto directo', indirect: 'Impacto indirecto', normal: 'No impactado'};
     inspector.innerHTML = `
       <span class="eyebrow">Inspector</span>
-      <h3>${data.name}</h3>
-      <div class="inspector-badge ${data.status}">${statusLabels[data.status] || data.status}</div>
+      <h3>${escapeHtml(component.name)}</h3>
+      <div class="inspector-badge ${status}">${labels[status]}</div>
       <dl>
-        <div><dt>Tipo</dt><dd>${data.kind}</dd></div>
-        <div><dt>Criticidad</dt><dd>C${data.criticality}</dd></div>
-        <div><dt>Owner</dt><dd>${data.owner}</dd></div>
-        ${data.impactDepth ? `<div><dt>Nivel</dt><dd>L${data.impactDepth}</dd></div>` : ''}
+        <div><dt>Tipo</dt><dd>${escapeHtml(component.kind)}</dd></div>
+        <div><dt>Criticidad</dt><dd>C${component.criticality}</dd></div>
+        <div><dt>Owner</dt><dd>${escapeHtml(component.owner)}</dd></div>
+        ${impact ? `<div><dt>Nivel</dt><dd>L${impact.depth}</dd></div>` : ''}
       </dl>
-      ${data.validation ? `<p><strong>Validación:</strong><br>${data.validation}</p>` : ''}
+      ${impact?.validation ? `<p><strong>Validacion:</strong><br>${escapeHtml(impact.validation)}</p>` : ''}
     `;
-  };
+  }
 
-  cy.on('tap', 'node', event => updateInspector(event.target));
+  function escapeHtml(value) {
+    return String(value ?? '').replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+  }
 
   let impactOnly = false;
   toggleButton?.addEventListener('click', () => {
     impactOnly = !impactOnly;
-    cy.elements().removeClass('dimmed');
-    if (impactOnly) {
-      cy.nodes().filter(node => !impactedIds.has(node.id())).addClass('dimmed');
-      cy.edges().filter(edge => !edge.data('onImpactPath')).addClass('dimmed');
-      toggleButton.textContent = 'Ver ecosistema';
-    } else {
-      toggleButton.textContent = 'Solo impacto';
-    }
-    cy.fit(impactOnly ? cy.elements().not('.dimmed') : cy.elements(), 40);
+    [...svg.querySelectorAll('.graph-node')].forEach(node => {
+      node.classList.toggle('dimmed', impactOnly && !impactedIds.has(node.dataset.id));
+    });
+    [...svg.querySelectorAll('.graph-edge')].forEach(edge => {
+      edge.classList.toggle('dimmed', impactOnly && !edge.classList.contains('impact-edge'));
+    });
+    toggleButton.textContent = impactOnly ? 'Ver ecosistema' : 'Solo impacto';
   });
 
-  fitButton?.addEventListener('click', () => cy.fit(cy.elements(), 40));
+  fitButton?.addEventListener('click', () => {
+    svg.setAttribute('viewBox', '0 0 1100 640');
+  });
 
-  if (rootId && cy.getElementById(rootId).length) {
-    cy.getElementById(rootId).select();
-    updateInspector(cy.getElementById(rootId));
-  }
-
-  cy.ready(() => cy.fit(cy.elements(), 40));
+  if (rootId && componentById.has(rootId)) updateInspector(componentById.get(rootId), 'root', null);
 })();

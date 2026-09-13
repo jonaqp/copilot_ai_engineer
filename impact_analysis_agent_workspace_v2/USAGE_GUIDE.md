@@ -68,3 +68,21 @@ Para pedir el radar visual:
 Para un cambio real:
 
 > Revisa el diff actual. Identifica las class y def modificadas, mapea qué componentes dependen de ellas directa o indirectamente y entrega GO / GO WITH CONDITIONS / NO-GO con evidencias.
+
+## Grafo visual corregido
+
+La visualizacion ya no depende de un CDN. El grafo se genera como SVG desde `demo_arch_radar/static/impact-graph.js` y aparece dentro de `#impactGraph`.
+
+### Prueba inmediata sin Flask
+
+Abre directamente:
+
+`demo_arch_radar/static-demo.html`
+
+Debe mostrar el ecosistema completo, el nodo raiz en rojo, impactos L1 en amarillo, L2+ en cyan y dependencias ocultas con linea roja discontinua.
+
+### Prompt recomendado para el agente
+
+```text
+Analiza el impacto de cambiar el contrato de pricing-service y genera una visualizacion HTML del grafo de la aplicacion. Usa graph-visualization-renderer. Quiero ver nodos, aristas, ROOT, L1, L2+, dependencias ocultas e inspector de componentes. No reemplaces el grafo por una tabla.
+```

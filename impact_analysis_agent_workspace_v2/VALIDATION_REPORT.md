@@ -1,21 +1,28 @@
-# Validation Report — Impact Radar Visual
+# Validation Report
 
-## Resultado
-PASS con la salvedad de que Flask no está instalado en el entorno de construcción actual.
+## Correccion aplicada al grafo visual
 
-## Validaciones ejecutadas
-- `python -m compileall` sobre `demo_arch_radar/` y `scripts/`: PASS.
-- `pytest -q` sobre el motor de impacto: **4 passed**.
-- `node --check demo_arch_radar/static/impact-graph.js`: PASS.
-- `scripts/analyze_impact.py` para `pricing-service / contract`: PASS; score 81, nivel Crítico, decisión NO-GO.
-- Estructura visual agregada: Cytoscape.js, inspector de nodos, leyenda, filtro `Solo impacto`, pan/zoom/fit y fallback textual.
+Se revalido el problema reportado: la version anterior dependia de Cytoscape.js cargado desde CDN. En entornos corporativos, offline o con restricciones de red, esa libreria podia no cargar y la pagina terminaba mostrando solo detalles/tablas.
 
-## Limitación del entorno
-No se pudo ejecutar la vista Flask con test client porque Flask no está instalado en este runtime. El proyecto conserva `requirements.txt`; ejecutar `pip install -r requirements.txt` antes de iniciar la demo.
+La nueva version elimina esa dependencia remota y renderiza el grafo directamente como SVG con JavaScript local.
 
-## Semántica visual
-- raíz: rojo;
-- L1: amarillo;
-- L2+: cyan;
-- no impactados: azul/gris;
-- dependencia oculta: línea roja discontinua.
+## Checks ejecutados
+
+- PASS: `#impactGraph` existe en el HTML.
+- PASS: el payload `graphData` contiene componentes y dependencias.
+- PASS: `impact-graph.js` crea un elemento SVG real.
+- PASS: se renderizan nodos desde `components`.
+- PASS: se renderizan aristas desde `dependencies`.
+- PASS: el contenedor tiene altura visible de 560 px.
+- PASS: no existe dependencia CDN para el grafo.
+- PASS: `node --check` valida la sintaxis JavaScript.
+- PASS: 4 tests del motor de impacto.
+- PASS: la nueva skill `graph-visualization-renderer` pasa el validador.
+
+## Demo independiente
+
+`demo_arch_radar/static-demo.html` puede abrirse directamente en el navegador. Renderiza un escenario `pricing-service / contract` sin Flask ni acceso a Internet.
+
+## Nota del entorno de validacion
+
+No se pudo levantar Flask en este runtime porque la dependencia `flask` no esta instalada aqui. La validacion del motor, HTML, CSS, JavaScript, estructura del agente y skill si fue ejecutada.

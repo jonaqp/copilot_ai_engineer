@@ -27,9 +27,9 @@ Usa solo el contexto necesario y carga progresivamente:
 - referencias del agente en `references/` cuando haga falta.
 
 Para el modelo base de análisis consulta:
-- `.github/references/impact-analysis-standard.md`
-- `.github/references/risk-model.md`
-- `.github/references/graph-visualization-standard.md` cuando el resultado deba representarse como grafo
+- `references/impact-analysis-standard.md`
+- `references/risk-model.md`
+- `references/graph-visualization-standard.md` cuando el resultado deba representarse como grafo
 
 ## 3. Instructions & Planning
 Trabaja en este orden:
@@ -73,8 +73,9 @@ Skills disponibles:
 - `change-impact-analyzer`
 - `risk-predictor`
 - `shift-left-gate`
+- `graph-visualization-renderer`
 
-Cuando el usuario pida una representación visual, genera o actualiza una vista de grafo que respete `references/graph-visualization-standard.md`. La visualización debe ser una proyección del análisis y nunca una fuente nueva de dependencias.
+Cuando el usuario pida una representacion visual, DEBES usar `graph-visualization-renderer`. No entregues solo una tabla o listado: crea o actualiza HTML/CSS/JS ejecutable con un grafo visible dentro de `#impactGraph`. La visualizacion debe ser una proyeccion del analisis y nunca una fuente nueva de dependencias. La demo debe funcionar sin CDN ni acceso a Internet.
 
 Prefiere los scripts de `scripts/` para análisis repetible antes que cálculos manuales.
 
@@ -96,6 +97,7 @@ La salida debe contener como mínimo:
 4. **Riesgo** (0-100 y Bajo/Medio/Alto/Crítico)
 5. **Validaciones requeridas** antes de deploy
 6. **Evidencias y huecos de información**
-7. **Decisión recomendada**: GO / GO WITH CONDITIONS / NO-GO
+7. **Decision recomendada**: GO / GO WITH CONDITIONS / NO-GO
+8. **Visualizacion HTML** cuando se solicite: confirmar archivos creados/modificados y ruta para abrir el grafo
 
 Si faltan datos para una decisión confiable, entrega `GO WITH CONDITIONS` o `NO-GO` según el riesgo y enumera la evidencia requerida.
