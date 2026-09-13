@@ -1,0 +1,4 @@
+interface:
+  display_name: "Architectural Risk Predictor"
+  short_description: "Puntúa riesgo arquitectónico de 0 a 100 con evidencia."
+  brand_color: "#004481"

@@ -1,0 +1,26 @@
+{
+  "components": [
+    {"id":"storefront-web","name":"Storefront Web","kind":"frontend","criticality":4,"owner":"commerce-ui"},
+    {"id":"checkout-api","name":"Checkout API","kind":"api","criticality":5,"owner":"checkout"},
+    {"id":"cart-service","name":"Cart Service","kind":"service","criticality":4,"owner":"cart"},
+    {"id":"pricing-service","name":"Pricing Service","kind":"service","criticality":4,"owner":"pricing"},
+    {"id":"inventory-service","name":"Inventory Service","kind":"service","criticality":5,"owner":"inventory"},
+    {"id":"payment-adapter","name":"Payment Adapter","kind":"adapter","criticality":5,"owner":"payments"},
+    {"id":"order-db","name":"Order Database","kind":"database","criticality":5,"owner":"orders"},
+    {"id":"notification-service","name":"Notification Service","kind":"service","criticality":3,"owner":"notifications"},
+    {"id":"analytics-consumer","name":"Analytics Consumer","kind":"consumer","criticality":2,"owner":"analytics"},
+    {"id":"legacy-erp-adapter","name":"Legacy ERP Adapter","kind":"adapter","criticality":4,"owner":"legacy"}
+  ],
+  "dependencies": [
+    {"source":"storefront-web","target":"checkout-api","kind":"ui-contract","documented":true},
+    {"source":"storefront-web","target":"cart-service","kind":"ui-contract","documented":true},
+    {"source":"checkout-api","target":"pricing-service","kind":"sync-api","documented":true},
+    {"source":"checkout-api","target":"inventory-service","kind":"sync-api","documented":true},
+    {"source":"checkout-api","target":"payment-adapter","kind":"sync-api","documented":true},
+    {"source":"checkout-api","target":"order-db","kind":"database","documented":true},
+    {"source":"cart-service","target":"pricing-service","kind":"sync-api","documented":false},
+    {"source":"notification-service","target":"order-db","kind":"async-event","documented":true},
+    {"source":"analytics-consumer","target":"order-db","kind":"async-event","documented":false},
+    {"source":"legacy-erp-adapter","target":"inventory-service","kind":"sync-api","documented":false}
+  ]
+}
