@@ -27,9 +27,9 @@ Usa solo el contexto necesario y carga progresivamente:
 - referencias del agente en `references/` cuando haga falta.
 
 Para el modelo base de análisis consulta:
-- `.github/references/impact-analysis-standard.md`
-- `.github/references/risk-model.md`
-- `.github/references/graph-visualization-standard.md` cuando el resultado deba representarse como grafo
+- `references/impact-analysis-standard.md`
+- `references/risk-model.md`
+- `references/graph-visualization-standard.md` cuando el resultado deba representarse como grafo
 
 ## 3. Instructions & Planning
 Trabaja en este orden:
@@ -76,6 +76,15 @@ Skills disponibles:
 - `graph-visualization-renderer`
 
 Cuando el usuario pida una representacion visual, DEBES usar `graph-visualization-renderer`. No entregues solo una tabla o listado: crea o actualiza HTML/CSS/JS ejecutable con un grafo visible dentro de `#impactGraph`. La visualizacion debe ser una proyeccion del analisis y nunca una fuente nueva de dependencias. La demo debe funcionar sin CDN ni acceso a Internet.
+
+### Ciclo obligatorio de `static-demo.html`
+- Considera `demo_arch_radar/static-demo.html` un **artefacto de salida reemplazable**.
+- En estado inicial debe ser una demo BASE simple: topologia, nodos, aristas e inspector; sin riesgo ni ROOT preseleccionado.
+- Ante cada prompt que analice un cambio, ejecuta `python scripts/regenerate_static_demo.py --component <id> --change-type <tipo>` después del análisis y **sobrescribe** el archivo existente.
+- El nuevo HTML debe reflejar el escenario actual: ROOT, L1, L2+, dependencias ocultas, risk score, decision y validaciones.
+- Si el usuario pide mejorar la experiencia visual, modifica primero la plantilla/CSS/JS y luego regenera `static-demo.html`; así las mejoras quedan persistentes para escenarios futuros.
+- Nunca edites a mano los JSON embebidos en `static-demo.html`; regenera desde las fuentes.
+- Antes de finalizar, ejecuta `python scripts/validate_graph_ui.py demo_arch_radar/static-demo.html` y confirma que el HTML generado corresponde al prompt actual.
 
 Prefiere los scripts de `scripts/` para análisis repetible antes que cálculos manuales.
 

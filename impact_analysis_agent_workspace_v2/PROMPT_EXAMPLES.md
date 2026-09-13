@@ -1,16 +1,33 @@
-# Prompts de ejemplo para Impact Radar
+# Prompts de ejemplo — Impact Radar
 
-## Caso 1 — contrato API
-Analiza el impacto de cambiar el contrato de `pricing-service`. Identifica dependientes directos e indirectos, conexiones ocultas, score de riesgo y tests Shift-Left. No modifiques código.
+## 1. Primer análisis visual
 
-## Caso 2 — esquema de base de datos
-Voy a cambiar el esquema de `order-db`. Evalúa el efecto dominó sobre APIs y consumidores asíncronos. Entrega rutas de propagación y decisión GO / GO WITH CONDITIONS / NO-GO.
+```text
+Analiza el impacto de cambiar el contrato de pricing-service.
+Actualiza demo_arch_radar/static-demo.html reemplazando la versión anterior.
+El grafo debe reflejar ROOT, L1, L2+, dependencias ocultas, risk score,
+decisión Shift-Left y validaciones. Ejecuta la validación del HTML al terminar.
+```
 
-## Caso 3 — diff real
-Revisa el diff actual. Detecta las `class`, `def`, endpoints o contratos modificados. Construye/actualiza el grafo solo con evidencia del repo y genera el análisis de impacto antes de proponer cambios.
+## 2. Cambiar el escenario y sobrescribir el mismo HTML
 
-## Caso 4 — preparación de pruebas
-Para el cambio actual, no implementes todavía. Dime primero qué pruebas de contrato, integración, funcionales y regresión son necesarias para cubrir todas las rutas de impacto de criticidad alta.
+```text
+Ahora analiza un cambio schema en order-db.
+No crees otro HTML. Regenera static-demo.html para que deje de mostrar
+pricing-service y muestre únicamente el nuevo escenario de order-db.
+```
 
-## Visualizar el efecto dominó
-> Analiza `pricing-service / contract` y representa el impacto en el radar visual. Resalta el componente raíz, los dependientes directos L1, los transitivos L2+ y cualquier dependencia no documentada. Permite inspeccionar criticidad y owner por nodo.
+## 3. Mejorar el radar progresivamente
+
+```text
+Mejora el radar agregando agrupación visual por owner y una leyenda de criticidad.
+Haz la mejora en la plantilla/CSS/JS para que sea persistente.
+Después regenera static-demo.html usando el escenario actual y valida el resultado.
+```
+
+## 4. Volver al estado base
+
+```text
+Restablece la demo visual al modo BASE sin componente raíz seleccionado.
+Regenera static-demo.html y valida que impactData sea null.
+```

@@ -1,14 +1,66 @@
 <!doctype html>
-<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Impact Radar - Demo Estatica</title><link rel="stylesheet" href="static/styles.css"></head>
-<body><header class="hero"><div><span class="eyebrow">Predictive Change Impact Copilot</span><h1>Impact Radar - Demo Estatica</h1><p>Grafo visual real de dependencias y efecto domino. Funciona sin Flask y sin CDN.</p></div><div class="radar" aria-hidden="true"><span></span><i></i></div></header>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Impact Radar - Demo Base</title>
+  <link rel="stylesheet" href="static/styles.css">
+</head>
+<body>
+<header class="hero">
+  <div>
+    <span class="eyebrow">Predictive Change Impact Copilot</span>
+    <h1>Impact Radar</h1>
+    <p>Demo base del ecosistema. Aun no hay un cambio seleccionado ni un efecto domino calculado.</p>
+  </div>
+  <div class="radar" aria-hidden="true"><span></span><i></i></div>
+</header>
 <main class="layout">
-<section class="card summary"><div class="metric"><span>Riesgo</span><strong>81/100</strong><small>Crítico</small></div><div class="metric"><span>Alcance</span><strong>3</strong><small>componentes</small></div><div class="metric"><span>Decision</span><strong class="decision">NO-GO</strong><small>pre-deploy</small></div></section>
-<section class="card full graph-card"><div class="graph-heading"><div><span class="eyebrow">Dependency Graph</span><h2>Radar visual de impacto</h2><p>Propagacion desde <strong>Pricing Service</strong>.</p></div><div class="graph-actions"><button id="fitGraph" type="button" class="secondary-button">Centrar</button><button id="toggleImpact" type="button" class="secondary-button">Solo impacto</button></div></div>
-<div class="graph-shell"><div id="impactGraph" role="img" aria-label="Grafo SVG de dependencias y propagacion de impacto"></div><aside id="nodeInspector" class="node-inspector"><span class="eyebrow">Inspector</span><h3>Selecciona un nodo</h3><p>Haz clic sobre un componente para ver criticidad, owner y relacion con el cambio.</p></aside></div>
-<div class="legend"><span><i class="legend-dot root-dot"></i>Cambio raiz</span><span><i class="legend-dot direct-dot"></i>Impacto directo</span><span><i class="legend-dot indirect-dot"></i>Impacto indirecto</span><span><i class="legend-dot normal-dot"></i>No impactado</span><span><i class="legend-line hidden-line"></i>Dependencia oculta</span></div></section>
-<section class="card full"><h2>Como probar</h2><p>Abre este archivo directamente en el navegador. El grafo SVG se genera con JavaScript local y no necesita Internet.</p></section>
+  <section class="card summary">
+<div class="metric"><span>Componentes</span><strong>10</strong><small>en el grafo</small></div>
+<div class="metric"><span>Dependencias</span><strong>10</strong><small>detectadas</small></div>
+<div class="metric"><span>Modo</span><strong class="decision">BASE</strong><small>sin cambio seleccionado</small></div>
+</section>
+
+  <section class="card full graph-card">
+    <div class="graph-heading">
+      <div>
+        <span class="eyebrow">Dependency Graph</span>
+        <h2>Radar visual de impacto</h2>
+        <p>Mapa base de la aplicacion. Ejecuta un prompt de impacto para convertirlo en un radar resaltado.</p>
+      </div>
+      <div class="graph-actions">
+        <button id="fitGraph" type="button" class="secondary-button">Centrar</button>
+        <button id="toggleImpact" type="button" class="secondary-button">Solo impacto</button>
+      </div>
+    </div>
+    <div class="graph-shell">
+      <div id="impactGraph" role="img" aria-label="Grafo SVG de dependencias y propagacion de impacto"></div>
+      <aside id="nodeInspector" class="node-inspector">
+        <span class="eyebrow">Inspector</span>
+        <h3>Selecciona un nodo</h3>
+        <p>Haz clic sobre un componente para ver criticidad, owner y relacion con el cambio.</p>
+      </aside>
+    </div>
+    <div class="legend">
+      <span><i class="legend-dot root-dot"></i>Cambio raiz</span>
+      <span><i class="legend-dot direct-dot"></i>Impacto directo</span>
+      <span><i class="legend-dot indirect-dot"></i>Impacto indirecto</span>
+      <span><i class="legend-dot normal-dot"></i>No impactado</span>
+      <span><i class="legend-line hidden-line"></i>Dependencia oculta</span>
+    </div>
+  </section>
+
+  
+
+  <section class="card full">
+    <h2>Estado de la demo</h2>
+    <p>Modo BASE: solo topologia real. El primer prompt de impacto regenerara este archivo y resaltara el escenario.</p>
+    <p><strong>Archivo regenerable:</strong> este HTML es un artefacto de salida. El skill debe sobrescribirlo en cada nuevo analisis.</p>
+  </section>
 </main>
 <script id="graphData" type="application/json">{"components": [{"id": "storefront-web", "name": "Storefront Web", "kind": "frontend", "criticality": 4, "owner": "commerce-ui"}, {"id": "checkout-api", "name": "Checkout API", "kind": "api", "criticality": 5, "owner": "checkout"}, {"id": "cart-service", "name": "Cart Service", "kind": "service", "criticality": 4, "owner": "cart"}, {"id": "pricing-service", "name": "Pricing Service", "kind": "service", "criticality": 4, "owner": "pricing"}, {"id": "inventory-service", "name": "Inventory Service", "kind": "service", "criticality": 5, "owner": "inventory"}, {"id": "payment-adapter", "name": "Payment Adapter", "kind": "adapter", "criticality": 5, "owner": "payments"}, {"id": "order-db", "name": "Order Database", "kind": "database", "criticality": 5, "owner": "orders"}, {"id": "notification-service", "name": "Notification Service", "kind": "service", "criticality": 3, "owner": "notifications"}, {"id": "analytics-consumer", "name": "Analytics Consumer", "kind": "consumer", "criticality": 2, "owner": "analytics"}, {"id": "legacy-erp-adapter", "name": "Legacy ERP Adapter", "kind": "adapter", "criticality": 4, "owner": "legacy"}], "dependencies": [{"source": "storefront-web", "target": "checkout-api", "kind": "ui-contract", "documented": true}, {"source": "storefront-web", "target": "cart-service", "kind": "ui-contract", "documented": true}, {"source": "checkout-api", "target": "pricing-service", "kind": "sync-api", "documented": true}, {"source": "checkout-api", "target": "inventory-service", "kind": "sync-api", "documented": true}, {"source": "checkout-api", "target": "payment-adapter", "kind": "sync-api", "documented": true}, {"source": "checkout-api", "target": "order-db", "kind": "database", "documented": true}, {"source": "cart-service", "target": "pricing-service", "kind": "sync-api", "documented": false}, {"source": "notification-service", "target": "order-db", "kind": "async-event", "documented": true}, {"source": "analytics-consumer", "target": "order-db", "kind": "async-event", "documented": false}, {"source": "legacy-erp-adapter", "target": "inventory-service", "kind": "sync-api", "documented": false}]}</script>
-<script id="impactData" type="application/json">{"root": {"id": "pricing-service", "name": "Pricing Service", "kind": "service", "criticality": 4, "owner": "pricing"}, "change_type": "contract", "impacts": [{"component": "checkout-api", "depth": 1, "path": ["checkout-api", "pricing-service"], "dependency_kind": "sync-api", "documented": true, "criticality": 5, "validation": "contract + integration test"}, {"component": "cart-service", "depth": 1, "path": ["cart-service", "pricing-service"], "dependency_kind": "sync-api", "documented": false, "criticality": 4, "validation": "contract + integration test"}, {"component": "storefront-web", "depth": 2, "path": ["storefront-web", "checkout-api", "pricing-service"], "dependency_kind": "ui-contract", "documented": true, "criticality": 4, "validation": "frontend contract + functional test + transitive regression"}], "risk": {"score": 81, "level": "Crítico", "factors": ["base:contract=40", "root_criticality:+15", "reachable_components:+12", "propagation_depth:+8", "undocumented_edges:+6"]}, "required_validations": ["contract + integration test", "frontend contract + functional test + transitive regression"], "missing_critical_tests": ["checkout-api", "cart-service", "storefront-web"], "decision": "NO-GO"}</script>
-<script src="static/impact-graph.js"></script></body></html>
+<script id="impactData" type="application/json">null</script>
+<script src="static/impact-graph.js"></script>
+</body>
+</html>

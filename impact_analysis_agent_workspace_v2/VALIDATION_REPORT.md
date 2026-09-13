@@ -1,28 +1,13 @@
-# Validation Report
+# Validation report — regenerable Impact Radar
 
-## Correccion aplicada al grafo visual
+Validated behavior:
 
-Se revalido el problema reportado: la version anterior dependia de Cytoscape.js cargado desde CDN. En entornos corporativos, offline o con restricciones de red, esa libreria podia no cargar y la pagina terminaba mostrando solo detalles/tablas.
+- `static-demo.html` can be regenerated in BASE mode with `impactData = null`.
+- Running the renderer for `pricing-service / contract` overwrites the same HTML and produces ROOT=`pricing-service`, risk=81 and decision=`NO-GO`.
+- Running it again for `order-db / schema` overwrites the prior scenario and produces ROOT=`order-db`.
+- Resetting without `--component` returns the same HTML to BASE mode.
+- HTML validator confirms graph container, payload, SVG renderer, node/edge renderer, offline operation and mode markers.
+- Impact engine tests: 4 passed.
+- JavaScript syntax check: passed when Node.js is available.
 
-La nueva version elimina esa dependencia remota y renderiza el grafo directamente como SVG con JavaScript local.
-
-## Checks ejecutados
-
-- PASS: `#impactGraph` existe en el HTML.
-- PASS: el payload `graphData` contiene componentes y dependencias.
-- PASS: `impact-graph.js` crea un elemento SVG real.
-- PASS: se renderizan nodos desde `components`.
-- PASS: se renderizan aristas desde `dependencies`.
-- PASS: el contenedor tiene altura visible de 560 px.
-- PASS: no existe dependencia CDN para el grafo.
-- PASS: `node --check` valida la sintaxis JavaScript.
-- PASS: 4 tests del motor de impacto.
-- PASS: la nueva skill `graph-visualization-renderer` pasa el validador.
-
-## Demo independiente
-
-`demo_arch_radar/static-demo.html` puede abrirse directamente en el navegador. Renderiza un escenario `pricing-service / contract` sin Flask ni acceso a Internet.
-
-## Nota del entorno de validacion
-
-No se pudo levantar Flask en este runtime porque la dependencia `flask` no esta instalada aqui. La validacion del motor, HTML, CSS, JavaScript, estructura del agente y skill si fue ejecutada.
+The ZIP is delivered with `demo_arch_radar/static-demo.html` in BASE mode so the first Copilot prompt visibly evolves the radar.

@@ -21,3 +21,8 @@ Agente predictivo de análisis de impacto para repositorios de software. Convier
 
 ## Visualización
 La demo usa **Cytoscape.js 3.34.x** desde CDN para renderizar el grafo en el navegador. No agrega dependencias Python nuevas. Si el CDN no está disponible, la pantalla muestra un fallback textual y el análisis funcional sigue operando.
+
+
+## Regenerable static demo
+
+`demo_arch_radar/static-demo.html` is intentionally delivered in BASE mode. The `graph-visualization-renderer` skill must overwrite it after each impact-analysis prompt by running `python scripts/regenerate_static_demo.py --component <id> --change-type <type>`. Visual improvements belong in the template/CSS/JS and are then preserved across future regenerations. See `USAGE_GUIDE.md`.
