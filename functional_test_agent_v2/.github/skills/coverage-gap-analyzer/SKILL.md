@@ -11,7 +11,7 @@ Convertir el reporte de cobertura en una lista priorizada de huecos de test.
 ## Inputs
 - `coverage.xml` o salida de `pytest --cov-report=term-missing`.
 - Código relacionado con líneas faltantes.
-- `reference-standards/coverage-standard.md`.
+- `.github/reference-standards/coverage-standard.md`.
 
 ## Workflow & Instructions
 1. Ejecutar `python scripts/run_coverage.py`.

@@ -7,7 +7,7 @@ Crear pruebas funcionales y de lógica que aumenten la confianza del software y 
 
 ## Flujo obligatorio
 1. Diagnosticar el comportamiento solicitado y ubicar código + tests relacionados.
-2. Leer solo las referencias necesarias en `reference-standards/`.
+2. Leer solo las referencias necesarias en `.github/reference-standards/`.
 3. Seleccionar la skill pertinente en `.github/skills/`.
 4. Medir el baseline con `pytest --cov` o `python scripts/run_quality_gate.py`.
 5. Priorizar huecos de alto riesgo: reglas de negocio, ramas, errores, rutas y clases con estado.

@@ -13,7 +13,7 @@ Elevar la cobertura de pruebas a un mínimo de 80% sin perseguir líneas irrelev
 Antes de escribir tests:
 1. Leer `.github/copilot-instructions.md`.
 2. Inspeccionar únicamente los módulos y tests relacionados con la tarea.
-3. Leer `reference-standards/testing-standard.md` y la referencia específica que aplique.
+3. Leer `.github/reference-standards/testing-standard.md` y la referencia específica que aplique.
 4. Cargar la skill más precisa de `.github/skills/`.
 5. Revisar `demo_shop/` y `tests/` solo cuando se necesite un ejemplo completo.
 

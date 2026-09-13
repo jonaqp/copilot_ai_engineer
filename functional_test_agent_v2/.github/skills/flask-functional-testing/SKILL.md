@@ -11,7 +11,7 @@ Validar flujos web observables con el cliente de pruebas de Flask.
 ## Inputs
 - `create_app` o instancia Flask.
 - Rutas y servicios involucrados.
-- `reference-standards/flask-functional-testing-reference.md`.
+- `.github/reference-standards/flask-functional-testing-reference.md`.
 
 ## Workflow & Instructions
 1. Crear fixture `app` con `TESTING=True`.

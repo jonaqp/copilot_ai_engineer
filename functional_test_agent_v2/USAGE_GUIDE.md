@@ -6,7 +6,7 @@ Este workspace contiene un agente GitHub Copilot orientado a elevar y mantener c
 
 - `.github/agents/functional-test-engineer.agent.md`: agente principal.
 - `.github/skills/`: skills especializadas.
-- `reference-standards/`: estándares reutilizables.
+- `.github/reference-standards/`: estándares reutilizables.
 - `demo_shop/`: aplicación Flask de carrito de compras.
 - `tests/`: ejemplo de suite pytest.
 - `scripts/`: coverage, gap analysis y quality gate.

@@ -11,7 +11,7 @@ Probar comportamiento real de clases y funciones con casos felices, inválidos y
 ## Inputs
 - Módulo Python bajo prueba.
 - Tests existentes relacionados.
-- `reference-standards/testing-standard.md`.
+- `.github/reference-standards/testing-standard.md`.
 - Coverage actual si está disponible.
 
 ## Workflow & Instructions

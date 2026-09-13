@@ -7,9 +7,9 @@ def main() -> int:
     required = [
         root / ".github/agents/functional-test-engineer.agent.md",
         root / ".github/copilot-instructions.md",
-        root / "reference-standards/testing-standard.md",
-        root / "reference-standards/flask-functional-testing-reference.md",
-        root / "reference-standards/coverage-standard.md",
+        root / ".github/reference-standards/testing-standard.md",
+        root / ".github/reference-standards/flask-functional-testing-reference.md",
+        root / ".github/reference-standards/coverage-standard.md",
         root / "demo_shop/app.py",
         root / "demo_shop/domain.py",
         root / "tests/test_domain.py",
