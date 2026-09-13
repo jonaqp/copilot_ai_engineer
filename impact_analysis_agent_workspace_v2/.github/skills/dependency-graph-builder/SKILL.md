@@ -20,7 +20,7 @@ Construir un grafo mínimo, verificable y útil para análisis de impacto.
 6. Evitar duplicados y ciclos falsos.
 7. Validar el grafo con `scripts/build_graph.py` si existe.
 
-Para criterios de evidencia leer `../../../references/impact-analysis-standard.md` cuando haya ambigüedad.
+Para criterios de evidencia leer `../../../.github/references/impact-analysis-standard.md` cuando haya ambigüedad.
 
 # Expected Output
 Entregar nodos, aristas, evidencia, dependencias dudosas y huecos de información.

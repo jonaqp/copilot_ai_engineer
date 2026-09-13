@@ -14,7 +14,7 @@ Priorizar cambios según probabilidad, alcance e impacto.
 - Evidencia de tests.
 
 # Workflow & Instructions
-1. Cargar `../../../references/risk-model.md`.
+1. Cargar `../../../.github/references/risk-model.md`.
 2. Usar la severidad base del tipo de cambio.
 3. Añadir peso por criticidad, alcance, profundidad y conexiones ocultas.
 4. Aplicar mitigación solo por evidencias concretas de pruebas.
