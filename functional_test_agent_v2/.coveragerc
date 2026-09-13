@@ -1,0 +1,14 @@
+[run]
+branch = True
+source = demo_shop
+omit =
+    demo_shop/templates/*
+    demo_shop/static/*
+
+[report]
+show_missing = True
+skip_covered = False
+fail_under = 80
+exclude_lines =
+    pragma: no cover
+    if __name__ == .__main__.:

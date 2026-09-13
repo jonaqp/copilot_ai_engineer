@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}Carrito · Nova Shop{% endblock %}
+{% block content %}
+<section class="page-heading">
+  <div>
+    <p class="eyebrow">TU COMPRA</p>
+    <h1>Carrito de compras</h1>
+  </div>
+  <a class="secondary-link" href="{{ url_for('home') }}">Seguir comprando</a>
+</section>
+
+<div class="cart-layout">
+  <section class="cart-panel" aria-label="Productos del carrito">
+    {% if cart.items %}
+      {% for item in cart.items %}
+      <article class="cart-row">
+        <div class="mini-visual">{{ item.product.name[0] }}</div>
+        <div class="cart-info">
+          <p class="category">{{ item.product.category }}</p>
+          <h2>{{ item.product.name }}</h2>
+          <p>${{ '%.2f'|format(item.product.price) }} c/u</p>
+        </div>
+        <form action="{{ url_for('update_cart', product_id=item.product.id) }}" method="post" class="qty-form">
+          <label for="cart-qty-{{ item.product.id }}">Cantidad</label>
+          <input id="cart-qty-{{ item.product.id }}" type="number" name="quantity" value="{{ item.quantity }}" min="0" max="{{ item.product.stock }}">
+          <button type="submit">Actualizar</button>
+        </form>
+        <strong>${{ '%.2f'|format(item.subtotal) }}</strong>
+        <form action="{{ url_for('remove_from_cart', product_id=item.product.id) }}" method="post">
+          <button class="danger-link" type="submit">Eliminar</button>
+        </form>
+      </article>
+      {% endfor %}
+    {% else %}
+      <div class="empty-state">
+        <h2>Tu carrito está vacío</h2>
+        <p>Agrega algunos productos para comenzar.</p>
+        <a class="primary-link" href="{{ url_for('home') }}">Ver productos</a>
+      </div>
+    {% endif %}
+  </section>
+
+  <aside class="summary-card">
+    <p class="eyebrow">RESUMEN</p>
+    <h2>Total de compra</h2>
+    <dl>
+      <div><dt>Subtotal</dt><dd>${{ '%.2f'|format(totals.subtotal) }}</dd></div>
+      <div><dt>Descuento</dt><dd>-${{ '%.2f'|format(totals.discount) }}</dd></div>
+      <div><dt>IVA</dt><dd>${{ '%.2f'|format(totals.tax) }}</dd></div>
+      <div class="grand-total"><dt>Total</dt><dd>${{ '%.2f'|format(totals.total) }}</dd></div>
+    </dl>
+    <form action="{{ url_for('checkout') }}" method="post" class="checkout-form">
+      <label for="customer_name">Nombre del cliente</label>
+      <input id="customer_name" name="customer_name" placeholder="Jonathan" required>
+      <button type="submit" {% if not cart.items %}disabled{% endif %}>Finalizar compra</button>
+    </form>
+  </aside>
+</div>
+{% endblock %}

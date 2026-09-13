@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Compra completada · Nova Shop{% endblock %}
+{% block content %}
+<section class="success-card">
+  <div class="success-icon">✓</div>
+  <p class="eyebrow">CHECKOUT COMPLETADO</p>
+  <h1>Gracias, {{ summary.customer }}</h1>
+  <p>Procesamos {{ summary.items }} artículo(s) por un total de <strong>${{ '%.2f'|format(summary.total) }}</strong>.</p>
+  <a class="primary-link" href="{{ url_for('home') }}">Volver al catálogo</a>
+</section>
+{% endblock %}
