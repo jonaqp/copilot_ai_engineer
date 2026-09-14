@@ -1,0 +1,7 @@
+[
+  {"name":"credit_ok","status":"A","balance":10000,"type":"C","amount":2500,"expected_balance":12500,"rc":0},
+  {"name":"debit_ok","status":"A","balance":10000,"type":"D","amount":2500,"expected_balance":7500,"rc":0},
+  {"name":"insufficient","status":"A","balance":1000,"type":"D","amount":2500,"expected_balance":1000,"rc":8},
+  {"name":"closed","status":"C","balance":10000,"type":"C","amount":2500,"expected_balance":10000,"rc":12},
+  {"name":"invalid","status":"A","balance":10000,"type":"X","amount":2500,"expected_balance":10000,"rc":4}
+]
