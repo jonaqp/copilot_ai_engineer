@@ -1,0 +1,3 @@
+interface:
+  display_name: "Merge Readiness Gate"
+  short_description: "Decide si un PR esta listo para merge"
