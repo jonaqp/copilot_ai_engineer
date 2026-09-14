@@ -1,0 +1,3 @@
+interface:
+  display_name: "Parallel Test Coordinator"
+  short_description: "Planifica y ejecuta testing focalizado y de regresión como workstream independiente. Usar cuand"

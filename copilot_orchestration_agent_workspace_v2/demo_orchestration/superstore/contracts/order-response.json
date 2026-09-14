@@ -1,0 +1,9 @@
+{
+  "required": [
+    "status"
+  ],
+  "allowed_status": [
+    "CONFIRMED",
+    "REJECTED"
+  ]
+}

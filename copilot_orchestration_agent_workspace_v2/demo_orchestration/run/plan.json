@@ -1,0 +1,22 @@
+{
+  "run_id": "run-20260914T000613Z",
+  "goal": "Validate SuperStore checkout change before merge",
+  "waves": [
+    {
+      "id": "wave-1",
+      "parallel": true,
+      "tasks": [
+        "contract-specialist",
+        "integration-specialist",
+        "testing-specialist"
+      ]
+    },
+    {
+      "id": "wave-2",
+      "parallel": false,
+      "tasks": [
+        "validation-specialist"
+      ]
+    }
+  ]
+}

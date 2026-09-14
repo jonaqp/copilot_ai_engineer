@@ -1,0 +1,3 @@
+interface:
+  display_name: "Multiagent Result Aggregator"
+  short_description: "Normaliza y consolida resultados de múltiples subagentes sin perder fallos ni contradicciones. "

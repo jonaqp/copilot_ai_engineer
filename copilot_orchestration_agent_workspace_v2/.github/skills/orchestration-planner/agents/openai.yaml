@@ -1,0 +1,3 @@
+interface:
+  display_name: "Orchestration Planner"
+  short_description: "Construye un DAG de ejecución para tareas complejas de software. Usar cuando el trabajo deba de"

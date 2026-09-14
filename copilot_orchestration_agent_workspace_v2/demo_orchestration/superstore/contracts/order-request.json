@@ -1,0 +1,12 @@
+{
+  "required": [
+    "sku",
+    "qty",
+    "payment_token"
+  ],
+  "types": {
+    "sku": "str",
+    "qty": "int",
+    "payment_token": "str"
+  }
+}

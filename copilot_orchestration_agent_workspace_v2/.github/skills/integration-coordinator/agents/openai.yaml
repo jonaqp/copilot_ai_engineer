@@ -1,0 +1,3 @@
+interface:
+  display_name: "Integration Coordinator"
+  short_description: "Coordina la validación de integraciones entre servicios, adapters, endpoints y configuración. U"
