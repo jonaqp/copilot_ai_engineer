@@ -1,0 +1,11 @@
+{
+  "servers": {
+    "github-bbva": {
+      "type": "http",
+      "url": "https://api.githubcopilot.com/mcp/",
+      "headers": {
+        "X-MCP-Toolsets": "code_security, copilot, dependabot, discussions, gists, git, issues, labels, notifications, projects, pull_requests, repos, security_advisories, stargazers, copilot_spaces, github_support_docs_search"
+      }
+    }
+  }
+}

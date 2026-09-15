@@ -1,0 +1,17 @@
+{
+  "order-service": {
+    "depends_on": [
+      "catalog-service",
+      "inventory-service",
+      "payment-service"
+    ]
+  },
+  "payment-service": {
+    "protocol": "internal-python",
+    "critical": true
+  },
+  "inventory-service": {
+    "protocol": "internal-python",
+    "critical": true
+  }
+}

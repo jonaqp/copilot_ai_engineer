@@ -1,0 +1,4 @@
+control,severity,status,evidence,remediation
+OS-001,high,failed,SSH root login enabled,Deshabilitar login directo de root segun hardening vigente
+TLS-002,critical,failed,TLS 1.0 enabled,Retirar protocolos legacy tras validar compatibilidad
+LOG-003,medium,passed,Central logging activo,

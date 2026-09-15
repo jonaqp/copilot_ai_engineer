@@ -1,0 +1,3 @@
+interface:
+  display_name: "COBOL Validation Gate"
+  short_description: "Quality gate de migracion HOST a COBOL"

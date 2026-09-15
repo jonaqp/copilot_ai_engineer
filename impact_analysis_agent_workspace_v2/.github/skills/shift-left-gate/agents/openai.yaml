@@ -1,0 +1,4 @@
+interface:
+  display_name: "Shift-Left Safety Gate"
+  short_description: "Convierte impacto y riesgo en validaciones preventivas y decisión de deploy."
+  brand_color: "#004481"

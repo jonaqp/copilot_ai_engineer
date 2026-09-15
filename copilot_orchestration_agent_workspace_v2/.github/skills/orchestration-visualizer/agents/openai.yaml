@@ -1,0 +1,3 @@
+interface:
+  display_name: "Orchestration Visualizer"
+  short_description: "Genera un dashboard HTML local del run multiagente. Usar cuando se requiera visualizar DAG, sub"

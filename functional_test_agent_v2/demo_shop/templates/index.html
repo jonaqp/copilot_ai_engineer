@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Productos · Nova Shop{% endblock %}
+{% block content %}
+<section class="hero">
+  <div>
+    <p class="eyebrow">DEMO E-COMMERCE</p>
+    <h1>Compra simple. Tests sólidos.</h1>
+    <p>Una aplicación Flask con clases, funciones y flujos perfectos para practicar testing funcional y coverage.</p>
+  </div>
+  <div class="hero-badge">Coverage target<br><strong>&gt; 80%</strong></div>
+</section>
+
+<section class="toolbar" aria-label="Filtros">
+  <div>
+    <p class="eyebrow">CATÁLOGO</p>
+    <h2>Productos destacados</h2>
+  </div>
+  <div class="filters">
+    <a href="{{ url_for('home') }}" class="chip {% if not active_category %}active{% endif %}">Todos</a>
+    <a href="{{ url_for('home', category='Accesorios') }}" class="chip">Accesorios</a>
+    <a href="{{ url_for('home', category='Audio') }}" class="chip">Audio</a>
+    <a href="{{ url_for('home', category='Video') }}" class="chip">Video</a>
+  </div>
+</section>
+
+<section class="product-grid" aria-label="Productos">
+  {% for product in products %}
+  <article class="product-card">
+    <div class="product-visual">{{ product.name[0] }}</div>
+    <p class="category">{{ product.category }}</p>
+    <h3>{{ product.name }}</h3>
+    <p class="description">{{ product.description }}</p>
+    <div class="product-meta">
+      <strong>${{ '%.2f'|format(product.price) }}</strong>
+      <span>{{ product.stock }} disponibles</span>
+    </div>
+    <form action="{{ url_for('add_to_cart', product_id=product.id) }}" method="post" class="add-form">
+      <label for="qty-{{ product.id }}">Cantidad</label>
+      <input id="qty-{{ product.id }}" type="number" name="quantity" value="1" min="1" max="{{ product.stock }}">
+      <button type="submit">Agregar</button>
+    </form>
+  </article>
+  {% else %}
+  <p>No hay productos para esta categoría.</p>
+  {% endfor %}
+</section>
+{% endblock %}

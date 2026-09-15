@@ -1,0 +1,19 @@
+{
+  "repository": "demo/platform-service",
+  "number": 43,
+  "title": "DEDATIOEN4-18921 PR DEVELOP",
+  "body": "Cambio de validacion",
+  "state": "OPEN",
+  "draft": false,
+  "base_ref": "develop",
+  "head_sha": "def456demo",
+  "mergeable": true,
+  "status_checks": [
+    {"name": "unit-tests", "required": true, "conclusion": "success"},
+    {"name": "quality-gate", "required": true, "conclusion": "failure"}
+  ],
+  "required_approvals": 1,
+  "approvals": 0,
+  "unresolved_review_threads": 2,
+  "security_blockers": 0
+}

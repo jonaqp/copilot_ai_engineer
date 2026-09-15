@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "disableAllHooks": true,
+  "hooks": {
+    "sessionStart": [
+      {
+        "type": "prompt",
+        "prompt": "Antes de editar codigo, revisa README.md y ejecuta las pruebas baseline."
+      }
+    ]
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "servers": {
+    "bbva-github": {
+      "type": "http",
+      "url": "https://copilot-api.bbva.ghe.com/mcp"
+    },
+    "figma": {
+      "type": "http",
+      "url": "https://mcp.figma.com/mcp"
+    }
+  }
+}

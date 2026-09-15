@@ -1,0 +1,8 @@
+{
+  "prod_nonprod_segregated": true,
+  "production_data_in_nonprod": false,
+  "transport_protocol": "https",
+  "tls_version": 1.2,
+  "official_repository": true,
+  "pipeline_security_scans": true
+}

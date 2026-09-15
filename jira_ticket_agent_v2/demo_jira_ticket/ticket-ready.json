@@ -1,0 +1,22 @@
+{
+  "key": "DEDATIOCL1-21347",
+  "summary": "[Peru - PER DAT TEAM INFINITY SPRINTS] DataX - PFCO - SDATOOL-54010 - Pase a produccion",
+  "status": "READY TO DEPLOY",
+  "priority": "Medium",
+  "description": "Informacion General\nProyecto Finalista: SDATOOL-57068\nUUAA: PFCO\nNamespace: pe.pfco.app-id-175649.pro\nOrigen: ORACLEPHYSICS\nDestino: PROCESSING ADA\nAdaptador: adapter-oraclephysics-modelpricing\nBloque 1\nTransfer: pffco_oraclephysicsprocessingadatariffrate_1\nDataObject: ORIGEN x_readoraclephysicstariffrate_1 DESTINO x_writeprocessingadatariffrate_1",
+  "readiness": {"dor_complete": true, "dod_complete": true, "acceptance_complete": true},
+  "attachments": [
+    {"filename":"DEDATIOCL1-21347-DQA.jpg","size":1350000,"mime":"image/jpeg"},
+    {"filename":"Matriz_Escalamiento.png","size":113000,"mime":"image/png"},
+    {"filename":"Matriz_Escalamiento_PFCO.xlsx","size":62000,"mime":"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+  ],
+  "links": [
+    {"type":"in Deployment","key":"DEDATIOCL1-21445","status":"DEPLOYED"},
+    {"type":"is child item of","key":"DEDATIOCL1-20658","status":"DEPLOYED"},
+    {"type":"tested by","key":"DEDATIOCL1-21267","status":"ACCEPTED"}
+  ],
+  "subtasks": [
+    {"key":"DEMO-1","summary":"[VB][IPO]","status":"ACCEPTED","assignee":"usuario1"},
+    {"key":"DEMO-2","summary":"[VB][QA]","status":"ACCEPTED","assignee":"usuario2"}
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "repository": "demo/platform-service",
+  "number": 42,
+  "title": "[DEDATIOEN4-18921] - PR DEVELOP",
+  "body": "feat(DEDATIOCL1-22769): agrega validacion de contrato antes del deploy\n\nIncluye pruebas funcionales y documentacion.",
+  "state": "OPEN",
+  "draft": false,
+  "base_ref": "develop",
+  "head_sha": "abc123demo",
+  "mergeable": true,
+  "status_checks": [
+    {"name": "unit-tests", "required": true, "conclusion": "success"},
+    {"name": "quality-gate", "required": true, "conclusion": "success"}
+  ],
+  "required_approvals": 1,
+  "approvals": 1,
+  "unresolved_review_threads": 0,
+  "security_blockers": 0
+}

@@ -1,0 +1,32 @@
+{
+  "jira_key": "DEMO-123",
+  "feature": "Validar transferencia DataX de clientes",
+  "test_cases": [
+    {
+      "summary": "Transferencia exitosa",
+      "preconditions": [
+        "Archivo de entrada valido"
+      ],
+      "steps": [
+        {
+          "action": "Ejecutar transferencia en entorno previo",
+          "data": "archivo_controlado.csv",
+          "expected": "Proceso finaliza OK y registra conteos"
+        }
+      ],
+      "evidence_required": [
+        "log de ejecucion",
+        "captura de conteos origen/destino"
+      ]
+    },
+    {
+      "summary": "Archivo invalido",
+      "steps": [
+        {
+          "action": "Procesar archivo con cabecera incorrecta",
+          "expected": "Proceso rechaza entrada y genera error controlado"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Validation Fan In"
+  short_description: "Aplica un quality gate al finalizar varios workstreams. Usar después de integrar resultados de "

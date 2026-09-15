@@ -1,0 +1,10 @@
+{
+  "key": "DEMO-999",
+  "summary": "Pase produccion DataX",
+  "status": "IN PROGRESS",
+  "description": "Proyecto Finalista: DEMO\nUUAA: PFCO\nOrigen: ORACLEPHYSICS",
+  "readiness": {"dor_complete": true, "dod_complete": false, "acceptance_complete": false},
+  "attachments": [{"filename":"captura.png","size":0,"mime":"image/png"}],
+  "links": [{"type":"tested by","key":"TEST-1","status":"IN PROGRESS"}],
+  "subtasks": [{"key":"DEMO-2","summary":"QA","status":"IN PROGRESS","assignee":null}]
+}

@@ -1,0 +1,4 @@
+stage("Build") { echo "build" }
+stage("Test") { echo "test" }
+stage("Sonar") { echo "quality" }
+stage("Security Scan") { echo "chimera" }

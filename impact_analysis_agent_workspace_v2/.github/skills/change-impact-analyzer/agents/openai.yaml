@@ -1,0 +1,4 @@
+interface:
+  display_name: "Change Impact Analyzer"
+  short_description: "Calcula efecto dominó y rutas de propagación de un cambio."
+  brand_color: "#004481"

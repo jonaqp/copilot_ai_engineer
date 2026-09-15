@@ -1,0 +1,14 @@
+{
+  "jira_key": "DEMO-123",
+  "pr_url": "https://github.example/pr/1",
+  "hu_linked": true,
+  "required_approvals": [
+    "SM"
+  ],
+  "latest_build_passed": true,
+  "tests_linked": [
+    "TEST-DEMO"
+  ],
+  "bot_validation": true,
+  "sonar_passed": true
+}

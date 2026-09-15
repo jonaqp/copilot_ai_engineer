@@ -1,0 +1,56 @@
+{
+  "version": 1,
+  "hooks": {
+    "sessionStart": [
+      {
+        "type": "command",
+        "command": "python .github/hooks/scripts/hook_explicador.py sessionStart",
+        "timeoutSec": 10
+      }
+    ],
+    "userPromptSubmitted": [
+      {
+        "type": "command",
+        "command": "python .github/hooks/scripts/hook_explicador.py userPromptSubmitted",
+        "timeoutSec": 10
+      }
+    ],
+    "preToolUse": [
+      {
+        "type": "command",
+        "matcher": "bash|powershell|edit|create|view",
+        "command": "python .github/hooks/scripts/hook_explicador.py preToolUse",
+        "timeoutSec": 10
+      }
+    ],
+    "postToolUse": [
+      {
+        "type": "command",
+        "matcher": "bash|powershell|edit|create|view",
+        "command": "python .github/hooks/scripts/hook_explicador.py postToolUse",
+        "timeoutSec": 10
+      }
+    ],
+    "postToolUseFailure": [
+      {
+        "type": "command",
+        "command": "python .github/hooks/scripts/hook_explicador.py postToolUseFailure",
+        "timeoutSec": 10
+      }
+    ],
+    "agentStop": [
+      {
+        "type": "command",
+        "command": "python .github/hooks/scripts/hook_explicador.py agentStop",
+        "timeoutSec": 10
+      }
+    ],
+    "sessionEnd": [
+      {
+        "type": "command",
+        "command": "python .github/hooks/scripts/hook_explicador.py sessionEnd",
+        "timeoutSec": 10
+      }
+    ]
+  }
+}

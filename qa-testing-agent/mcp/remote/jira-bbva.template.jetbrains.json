@@ -1,0 +1,8 @@
+{
+  "servers": {
+    "jira-bbva": {
+      "type": "http",
+      "url": "<PEGAR_ENDPOINT_MCP_JIRA_HOMOLOGADO_BBVA>"
+    }
+  }
+}

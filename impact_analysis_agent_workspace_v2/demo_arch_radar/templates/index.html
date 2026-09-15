@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Impact Radar</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <header class="hero">
+    <div>
+      <span class="eyebrow">Predictive Change Impact Copilot</span>
+      <h1>Impact Radar</h1>
+      <p>Detecta conexiones ocultas, visualiza el efecto dominó y define el gate Shift-Left antes del deploy.</p>
+    </div>
+    <div class="radar" aria-hidden="true"><span></span><i></i></div>
+  </header>
+
+  <main class="layout">
+    <section class="card control-panel">
+      <h2>Simular un cambio</h2>
+      <form method="post">
+        <label for="component">Componente</label>
+        <select id="component" name="component">
+          {% for c in components %}
+          <option value="{{ c.id }}" {% if selected == c.id %}selected{% endif %}>{{ c.name }} · C{{ c.criticality }}</option>
+          {% endfor %}
+        </select>
+
+        <label for="change_type">Tipo de cambio</label>
+        <select id="change_type" name="change_type">
+          {% for t in ['behavior','performance','config','dependency','contract','schema'] %}
+          <option value="{{ t }}" {% if change_type == t %}selected{% endif %}>{{ t }}</option>
+          {% endfor %}
+        </select>
+
+        <button type="submit">Analizar impacto</button>
+      </form>
+      <div class="hint">Prueba <strong>pricing-service / contract</strong> o <strong>order-db / schema</strong>.</div>
+    </section>
+
+    {% if report %}
+    <section class="card summary">
+      <div class="metric"><span>Riesgo</span><strong>{{ report.risk.score }}/100</strong><small>{{ report.risk.level }}</small></div>
+      <div class="metric"><span>Alcance</span><strong>{{ report.impacts|length }}</strong><small>componentes</small></div>
+      <div class="metric"><span>Decisión</span><strong class="decision">{{ report.decision }}</strong><small>pre-deploy</small></div>
+    </section>
+    {% else %}
+    <section class="card summary intro-summary">
+      <div><span class="eyebrow">Mapa vivo</span><h2>Explora el ecosistema</h2><p>Ejecuta un análisis para resaltar el nodo cambiado, impactos directos, indirectos y dependencias ocultas.</p></div>
+    </section>
+    {% endif %}
+
+    <section class="card full graph-card">
+      <div class="graph-heading">
+        <div>
+          <span class="eyebrow">Dependency Graph</span>
+          <h2>Radar visual de impacto</h2>
+          <p>{% if report %}Propagación desde <strong>{{ report.root.name }}</strong>.{% else %}Vista completa del ecosistema técnico.{% endif %}</p>
+        </div>
+        <div class="graph-actions">
+          <button id="fitGraph" type="button" class="secondary-button">Centrar</button>
+          <button id="toggleImpact" type="button" class="secondary-button" {% if not report %}disabled{% endif %}>Solo impacto</button>
+        </div>
+      </div>
+
+      <div class="graph-shell">
+        <div id="impactGraph" role="img" aria-label="Grafo SVG de dependencias y propagación de impacto"></div>
+        <aside id="nodeInspector" class="node-inspector">
+          <span class="eyebrow">Inspector</span>
+          <h3>Selecciona un nodo</h3>
+          <p>Haz clic sobre un componente para ver criticidad, owner y su relación con el cambio.</p>
+        </aside>
+      </div>
+
+      <div class="legend" aria-label="Leyenda del grafo">
+        <span><i class="legend-dot root-dot"></i>Cambio raíz</span>
+        <span><i class="legend-dot direct-dot"></i>Impacto directo</span>
+        <span><i class="legend-dot indirect-dot"></i>Impacto indirecto</span>
+        <span><i class="legend-dot normal-dot"></i>No impactado</span>
+        <span><i class="legend-line hidden-line"></i>Dependencia oculta</span>
+      </div>
+      <noscript><p class="graph-warning">Activa JavaScript para visualizar el grafo interactivo.</p></noscript>
+    </section>
+
+    {% if report %}
+    <section class="card full">
+      <div class="section-title"><h2>Efecto dominó</h2><span>{{ report.root.name }}</span></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Componente</th><th>Nivel</th><th>Ruta</th><th>Acoplamiento</th><th>Estado</th><th>Validación</th></tr></thead>
+          <tbody>
+          {% for i in report.impacts %}
+            <tr>
+              <td><strong>{{ i.component }}</strong></td>
+              <td><span class="pill">L{{ i.depth }}</span></td>
+              <td><code>{{ i.path|join(' → ') }}</code></td>
+              <td>{{ i.dependency_kind }}</td>
+              <td>{% if i.documented %}<span class="ok">documentada</span>{% else %}<span class="warn">oculta</span>{% endif %}</td>
+              <td>{{ i.validation }}</td>
+            </tr>
+          {% else %}
+            <tr><td colspan="6">No se detectaron dependientes.</td></tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card full">
+      <h2>Gate Shift-Left</h2>
+      <div class="grid-two">
+        <div><h3>Validaciones requeridas</h3><ul>{% for v in report.required_validations %}<li>{{ v }}</li>{% endfor %}</ul></div>
+        <div><h3>Factores de riesgo</h3><ul>{% for f in report.risk.factors %}<li><code>{{ f }}</code></li>{% endfor %}</ul></div>
+      </div>
+    </section>
+    {% endif %}
+  </main>
+
+  <script id="graphData" type="application/json">{{ graph_data|tojson }}</script>
+  <script id="impactData" type="application/json">{{ report|tojson if report else 'null' }}</script>
+  <script src="{{ url_for('static', filename='impact-graph.js') }}"></script>
+</body>
+</html>

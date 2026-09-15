@@ -1,0 +1,3 @@
+interface:
+  display_name: "Graph Visualization Renderer"
+  short_description: "Renderiza el grafo de impacto como HTML/SVG interactivo"

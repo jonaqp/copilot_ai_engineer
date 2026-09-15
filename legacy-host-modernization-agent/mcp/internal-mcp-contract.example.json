@@ -1,0 +1,11 @@
+{
+  "server": "bbva-internal-approved-mcp",
+  "purpose": "Reemplazar por MCP corporativo aprobado para catalogos/CMDB/Host/APX/Security",
+  "required_controls": [
+    "OAuth/identidad corporativa",
+    "minimo privilegio",
+    "auditoria",
+    "allowlist de tools",
+    "sin secretos en repo"
+  ]
+}

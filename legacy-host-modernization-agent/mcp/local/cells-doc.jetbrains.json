@@ -1,0 +1,11 @@
+{
+  "servers": {
+    "cells-doc": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@cells/rag-mcp-server"
+      ]
+    }
+  }
+}

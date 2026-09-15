@@ -1,0 +1,49 @@
+[01] sessionStart
+{
+  "additionalContext": "Laboratorio de hooks activo: solo local, auditable y con operaciones destructivas bloqueadas."
+}
+[02] userPromptSubmitted
+{}
+[03] preToolUse
+{
+  "permissionDecision": "allow"
+}
+[04] preToolUse
+{
+  "permissionDecision": "deny",
+  "permissionDecisionReason": "Bloqueado: se detecto un comando destructivo o que podria exponer credenciales."
+}
+[05] postToolUse
+{
+  "additionalContext": "Se modifico un archivo. Si afecta demo_cart, ejecuta sus pruebas focalizadas antes de declarar la tarea terminada."
+}
+[06] postToolUseFailure
+{
+  "additionalContext": "La ejecucion de la herramienta fallo. Revisa el error, cambia la estrategia y evita reintentos ciegos."
+}
+[07] subagentStart
+{
+  "additionalContext": "Mantente dentro del alcance del repositorio y devuelve evidencia concisa con conclusiones PASS/FAIL."
+}
+[08] subagentStop
+{
+  "decision": "allow"
+}
+[09] preCompact
+{
+  "additionalContext": "Conserva la tarea actual, los checks fallidos y las decisiones de hooks durante la compactacion."
+}
+[10] notification
+{}
+[11] errorOccurred
+{}
+[12] permissionRequest
+{
+  "behavior": "allow"
+}
+[13] agentStop
+{
+  "decision": "allow"
+}
+[14] sessionEnd
+{}

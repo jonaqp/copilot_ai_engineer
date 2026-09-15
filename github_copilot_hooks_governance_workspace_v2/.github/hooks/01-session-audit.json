@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "hooks": {
+    "sessionStart": [{"type":"command","command":"python .github/hooks/scripts/hook_handler.py sessionStart","timeoutSec":10}],
+    "userPromptSubmitted": [{"type":"command","command":"python .github/hooks/scripts/hook_handler.py userPromptSubmitted","timeoutSec":10}],
+    "sessionEnd": [{"type":"command","command":"python .github/hooks/scripts/hook_handler.py sessionEnd","timeoutSec":10}],
+    "notification": [{"type":"command","command":"python .github/hooks/scripts/hook_handler.py notification","timeoutSec":5}],
+    "preCompact": [{"type":"command","command":"python .github/hooks/scripts/hook_handler.py preCompact","timeoutSec":10}]
+  }
+}

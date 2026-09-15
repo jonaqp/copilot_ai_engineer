@@ -1,0 +1,4 @@
+interface:
+  display_name: "Dependency Graph Builder"
+  short_description: "Construye un grafo trazable de dependencias del repositorio."
+  brand_color: "#004481"

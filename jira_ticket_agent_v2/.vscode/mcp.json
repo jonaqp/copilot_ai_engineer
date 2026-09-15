@@ -1,0 +1,21 @@
+{
+  "mcpServers": {
+    "mcp-atlassian": {
+      "command": "uvx",
+      "args": ["mcp-atlassian"],
+      "env": {
+        "JIRA_URL": "https://jira.globaldevtools.bbva.com",
+        "JIRA_USERNAME": "jonathan.quiza",
+        "JIRA_API_TOKEN": "${input:jira_api_token}"
+      }
+    }
+  },
+  "inputs": [
+    {
+      "id": "jira_api_token",
+      "type": "promptString",
+      "description": "JIRA API token",
+      "password": true
+    }
+  ]
+}

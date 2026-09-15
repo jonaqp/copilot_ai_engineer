@@ -1,0 +1,3 @@
+interface:
+  display_name: "GitHub MCP PR Reader"
+  short_description: "Lee evidencia de PR mediante el MCP GitHub BBVA"
