@@ -64,13 +64,13 @@ def has_secret(text):
 
 
 def handle_session_start(payload):
-    audit("sessionStart", payload, "allow", "Session initialized")
-    return {"additionalContext": "Hooks lab active: local-only, auditable, destructive operations blocked."}
+    audit("sessionStart", payload, "allow", "Sesion inicializada")
+    return {"additionalContext": "Laboratorio de hooks activo: solo local, auditable y con operaciones destructivas bloqueadas."}
 
 
 def handle_prompt(payload):
     prompt = payload.get("prompt", "")
-    detail = "secret-like text detected" if has_secret(prompt) else "prompt audited"
+    detail = "se detecto texto con apariencia de secreto" if has_secret(prompt) else "prompt auditado"
     audit("userPromptSubmitted", payload, "observed", detail)
     return {}
 
@@ -81,56 +81,56 @@ def handle_pre_tool(payload):
     lowered = text.lower()
 
     if has_secret(text):
-        reason = "Blocked: tool arguments appear to contain a credential or secret."
+        reason = "Bloqueado: los argumentos de la herramienta parecen contener una credencial o secreto."
         audit("preToolUse", payload, "deny", reason)
         return {"permissionDecision": "deny", "permissionDecisionReason": reason}
 
     if any(re.search(p, text, re.IGNORECASE) for p in DANGEROUS_PATTERNS):
-        reason = "Blocked: destructive or credential-exposing command detected."
+        reason = "Bloqueado: se detecto un comando destructivo o que podria exponer credenciales."
         audit("preToolUse", payload, "deny", reason)
         return {"permissionDecision": "deny", "permissionDecisionReason": reason}
 
     if name in {"edit", "create", "Write", "Edit"} and ("../" in text or "..\\" in text):
-        reason = "Blocked: write outside repository boundary is not allowed in this demo."
+        reason = "Bloqueado: esta demo no permite escribir fuera de los limites del repositorio."
         audit("preToolUse", payload, "deny", reason)
         return {"permissionDecision": "deny", "permissionDecisionReason": reason}
 
     # Demonstrate argument rewriting for a harmless shell command.
     if name in {"bash", "powershell", "Bash"} and "pytest -q" in lowered:
-        audit("preToolUse", payload, "allow", "Allowed test command")
+        audit("preToolUse", payload, "allow", "Comando de pruebas permitido")
         return {"permissionDecision": "allow"}
 
-    audit("preToolUse", payload, "allow", f"Allowed tool: {name}")
+    audit("preToolUse", payload, "allow", f"Herramienta permitida: {name}")
     return {"permissionDecision": "allow"}
 
 
 def handle_post_tool(payload):
     name = payload.get("toolName") or payload.get("tool_name") or "unknown"
-    audit("postToolUse", payload, "observed", f"Completed tool: {name}")
+    audit("postToolUse", payload, "observed", f"Herramienta completada: {name}")
     if name in {"edit", "create", "Edit", "Write"}:
-        return {"additionalContext": "A file changed. Run focused tests before declaring the task complete."}
+        return {"additionalContext": "Se modifico un archivo. Ejecuta pruebas focalizadas antes de declarar la tarea terminada."}
     return {}
 
 
 def handle_post_tool_failure(payload):
     err = payload.get("error", "tool failed")
     audit("postToolUseFailure", payload, "failure", str(err)[:300])
-    return {"additionalContext": "Tool execution failed. Inspect the error, change strategy, and avoid blind retries."}
+    return {"additionalContext": "La ejecucion de la herramienta fallo. Revisa el error, cambia la estrategia y evita reintentos ciegos."}
 
 
 def handle_subagent_start(payload):
     name = payload.get("agentName") or payload.get("agent_name") or "subagent"
-    audit("subagentStart", payload, "observed", f"Started {name}")
-    return {"additionalContext": "Stay within repository scope and return concise evidence with PASS/FAIL conclusions."}
+    audit("subagentStart", payload, "observed", f"Iniciado {name}")
+    return {"additionalContext": "Mantente dentro del alcance del repositorio y devuelve evidencia concisa con conclusiones PASS/FAIL."}
 
 
 def handle_subagent_stop(payload):
     response = payload.get("response") or payload.get("last_assistant_message") or ""
-    audit("subagentStop", payload, "allow", "Subagent result inspected")
+    audit("subagentStop", payload, "allow", "Resultado del subagente inspeccionado")
     if has_secret(response):
         return {
             "decision": "allow",
-            "modifiedResponse": "[REDACTED BY HOOK] Subagent output contained secret-like material and was suppressed."
+            "modifiedResponse": "[REDACTADO POR HOOK] La salida del subagente contenia material con apariencia de secreto y fue ocultada."
         }
     return {"decision": "allow"}
 
@@ -144,14 +144,14 @@ def run_quality_gate():
 def handle_agent_stop(payload):
     already_active = bool(payload.get("stop_hook_active"))
     ok, output = run_quality_gate()
-    audit("agentStop", payload, "allow" if ok else "block", "quality gate passed" if ok else "quality gate failed")
+    audit("agentStop", payload, "allow" if ok else "block", "quality gate superado" if ok else "quality gate fallido")
     if ok:
         return {"decision": "allow"}
     if already_active:
         return {"decision": "allow"}
     return {
         "decision": "block",
-        "reason": "Final quality gate failed. Fix the demo_app unit tests before ending the turn. Test output:\n" + output
+        "reason": "Final quality gate fallido. Fix the demo_app unit tests before ending the turn. Test output:\n" + output
     }
 
 
@@ -173,16 +173,16 @@ def handle_notification(payload):
 
 def handle_pre_compact(payload):
     audit("preCompact", payload, "observed", f"trigger={payload.get('trigger', 'unknown')}")
-    return {"additionalContext": "Preserve current task, failing checks, and hook decisions during compaction."}
+    return {"additionalContext": "Conserva la tarea actual, los checks fallidos y las decisiones de hooks durante la compactacion."}
 
 
 def handle_permission_request(payload):
     name = payload.get("toolName") or payload.get("tool_name") or "unknown"
     text = tool_text(payload)
     if any(re.search(p, text, re.IGNORECASE) for p in DANGEROUS_PATTERNS) or has_secret(text):
-        audit("permissionRequest", payload, "deny", f"Denied permission for {name}")
-        return {"behavior": "deny", "message": "Hook policy denied this sensitive operation.", "interrupt": False}
-    audit("permissionRequest", payload, "allow", f"Allowed permission for {name}")
+        audit("permissionRequest", payload, "deny", f"Permiso denegado para {name}")
+        return {"behavior": "deny", "message": "La politica del hook denego esta operacion sensible.", "interrupt": False}
+    audit("permissionRequest", payload, "allow", f"Permiso permitido para {name}")
     return {"behavior": "allow"}
 
 
@@ -205,7 +205,7 @@ HANDLERS = {
 
 def main():
     if len(sys.argv) != 2 or sys.argv[1] not in HANDLERS:
-        print(json.dumps({"error": "usage: hook_handler.py <event>"}))
+        print(json.dumps({"error": "uso: hook_handler.py <evento>"}))
         return 1
     event = sys.argv[1]
     payload = read_payload()

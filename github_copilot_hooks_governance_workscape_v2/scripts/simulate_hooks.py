@@ -10,7 +10,7 @@ HOOK = ROOT / ".github" / "hooks" / "scripts" / "hook_handler.py"
 
 SCENARIOS = [
     ("sessionStart", {"sessionId": "demo-1", "timestamp": 1, "cwd": str(ROOT), "source": "new"}),
-    ("userPromptSubmitted", {"sessionId": "demo-1", "timestamp": 2, "cwd": str(ROOT), "prompt": "Add a square method and run tests"}),
+    ("userPromptSubmitted", {"sessionId": "demo-1", "timestamp": 2, "cwd": str(ROOT), "prompt": "Agrega un metodo square y ejecuta las pruebas"}),
     ("preToolUse", {"sessionId": "demo-1", "timestamp": 3, "cwd": str(ROOT), "toolName": "bash", "toolArgs": {"command": "python -m unittest discover -s demo_app -p test_*.py"}}),
     ("preToolUse", {"sessionId": "demo-1", "timestamp": 4, "cwd": str(ROOT), "toolName": "bash", "toolArgs": {"command": "rm -rf ."}}),
     ("postToolUse", {"sessionId": "demo-1", "timestamp": 5, "cwd": str(ROOT), "toolName": "edit", "toolArgs": {"path": "demo_app/calculator.py"}, "toolResult": {"resultType": "success", "textResultForLlm": "updated"}}),

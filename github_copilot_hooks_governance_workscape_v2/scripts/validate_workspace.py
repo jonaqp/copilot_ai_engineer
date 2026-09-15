@@ -39,5 +39,5 @@ for name, ok, detail in checks:
     print(f"{'PASS' if ok else 'FAIL'}: {name}" + (f" :: {detail.strip()}" if detail and not ok else ""))
 
 failed = [x for x in checks if not x[1]]
-print(f"\nRESULT: {'PASS' if not failed else 'FAIL'} ({len(checks)-len(failed)}/{len(checks)})")
+print(f"\nRESULTADO: {'PASS' if not failed else 'FAIL'} ({len(checks)-len(failed)}/{len(checks)})")
 raise SystemExit(1 if failed else 0)

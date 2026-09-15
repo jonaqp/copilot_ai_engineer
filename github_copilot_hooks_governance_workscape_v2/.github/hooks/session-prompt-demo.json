@@ -5,7 +5,7 @@
     "sessionStart": [
       {
         "type": "prompt",
-        "prompt": "Before editing code, inspect README.md and run the baseline tests."
+        "prompt": "Antes de editar codigo, revisa README.md y ejecuta las pruebas baseline."
       }
     ]
   }

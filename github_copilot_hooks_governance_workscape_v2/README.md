@@ -1,19 +1,20 @@
-# GitHub Copilot Hooks Governance Agent
+# Agente de Gobernanza de Hooks para GitHub Copilot
 
-Laboratorio sin MCP para aprender y demostrar hooks de GitHub Copilot.
+Laboratorio **sin MCP** para aprender y demostrar hooks de GitHub Copilot completamente en espanol.
 
 ## Objetivo
 
-Mostrar de forma práctica cómo los hooks aportan control determinista alrededor del agente:
+Mostrar de forma practica como los hooks aportan control determinista alrededor de un agente:
 
 - seguridad antes de ejecutar herramientas;
-- auditoría de prompts y tools;
-- validación después de cambios;
+- auditoria de prompts y tools;
+- validacion despues de cambios;
 - control de subagentes;
-- quality gate al terminar;
-- manejo de errores y cierre de sesión.
+- quality gate antes de terminar;
+- manejo de errores;
+- trazabilidad del ciclo de vida.
 
-## Quick start
+## Inicio rapido
 
 ```bash
 python scripts/validate_workspace.py
@@ -21,6 +22,6 @@ python scripts/simulate_hooks.py --all
 python scripts/run_demo_scenarios.py
 ```
 
-Los logs quedan en `.github/hooks/logs/audit.jsonl` y están ignorados por Git.
+Los logs quedan en `.github/hooks/logs/audit.jsonl` y estan ignorados por Git.
 
-No hay MCP, Jira, GitHub API ni credenciales.
+Este proyecto no usa MCP, Jira, GitHub API, tokens ni credenciales.

@@ -19,13 +19,13 @@ def main():
     secret = invoke("preToolUse", {"toolName": "bash", "toolArgs": {"command": "echo token=ghp_123456789012345678901234567890"}})
     stop = invoke("agentStop", {"stop_hook_active": False})
 
-    print("SAFE TOOL      :", safe.get("permissionDecision"))
-    print("DANGEROUS TOOL :", dangerous.get("permissionDecision"))
-    print("SECRET TOOL    :", secret.get("permissionDecision"))
-    print("AGENT STOP     :", stop.get("decision"))
+    print("HERRAMIENTA SEGURA     :", safe.get("permissionDecision"))
+    print("HERRAMIENTA PELIGROSA  :", dangerous.get("permissionDecision"))
+    print("ARGUMENTO CON SECRETO  :", secret.get("permissionDecision"))
+    print("CIERRE DEL AGENTE      :", stop.get("decision"))
 
     ok = safe.get("permissionDecision") == "allow" and dangerous.get("permissionDecision") == "deny" and secret.get("permissionDecision") == "deny" and stop.get("decision") == "allow"
-    print("RESULT         :", "PASS" if ok else "FAIL")
+    print("RESULTADO               :", "PASS" if ok else "FAIL")
     return 0 if ok else 1
 
 
