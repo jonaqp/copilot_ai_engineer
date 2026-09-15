@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "hooks": {
+    "subagentStart": [{"type":"command","command":"python .github/hooks/scripts/hook_handler.py subagentStart","timeoutSec":10}],
+    "subagentStop": [{"type":"command","command":"python .github/hooks/scripts/hook_handler.py subagentStop","timeoutSec":10}],
+    "agentStop": [{"type":"command","command":"python .github/hooks/scripts/hook_handler.py agentStop","timeoutSec":20}],
+    "errorOccurred": [{"type":"command","command":"python .github/hooks/scripts/hook_handler.py errorOccurred","timeoutSec":10}]
+  }
+}

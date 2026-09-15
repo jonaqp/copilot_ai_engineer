@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "hooks": {
+    "preToolUse": [{"type":"command","matcher":"bash|powershell|edit|create","command":"python .github/hooks/scripts/hook_handler.py preToolUse","timeoutSec":10}],
+    "postToolUse": [{"type":"command","matcher":"bash|powershell|edit|create","command":"python .github/hooks/scripts/hook_handler.py postToolUse","timeoutSec":10}],
+    "postToolUseFailure": [{"type":"command","command":"python .github/hooks/scripts/hook_handler.py postToolUseFailure","timeoutSec":10}],
+    "permissionRequest": [{"type":"command","matcher":"bash|powershell|edit|create","command":"python .github/hooks/scripts/hook_handler.py permissionRequest","timeoutSec":10}]
+  }
+}

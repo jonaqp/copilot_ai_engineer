@@ -1,0 +1,5 @@
+SAFE TOOL      : allow
+DANGEROUS TOOL : deny
+SECRET TOOL    : deny
+AGENT STOP     : allow
+RESULT         : PASS
