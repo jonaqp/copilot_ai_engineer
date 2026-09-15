@@ -1,0 +1,49 @@
+[01] sessionStart
+{
+  "additionalContext": "Hooks lab active: local-only, auditable, destructive operations blocked."
+}
+[02] userPromptSubmitted
+{}
+[03] preToolUse
+{
+  "permissionDecision": "allow"
+}
+[04] preToolUse
+{
+  "permissionDecision": "deny",
+  "permissionDecisionReason": "Blocked: destructive or credential-exposing command detected."
+}
+[05] postToolUse
+{
+  "additionalContext": "A file changed. Run focused tests before declaring the task complete."
+}
+[06] postToolUseFailure
+{
+  "additionalContext": "Tool execution failed. Inspect the error, change strategy, and avoid blind retries."
+}
+[07] subagentStart
+{
+  "additionalContext": "Stay within repository scope and return concise evidence with PASS/FAIL conclusions."
+}
+[08] subagentStop
+{
+  "decision": "allow"
+}
+[09] preCompact
+{
+  "additionalContext": "Preserve current task, failing checks, and hook decisions during compaction."
+}
+[10] notification
+{}
+[11] errorOccurred
+{}
+[12] permissionRequest
+{
+  "behavior": "allow"
+}
+[13] agentStop
+{
+  "decision": "allow"
+}
+[14] sessionEnd
+{}
